@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Night City Public Terminal</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+</head>
+
+<body>
+    <nav style="display: flex; align-items: center; padding: 10px; background-color: #333; color: white;">
+        <!-- Left-aligned link -->
+        <a href="index.html" style="text-decoration: none; color: white; font-weight: bold; margin-right: 20px;">Terminal</a>
+        
+        <!-- Centered navigation links -->
+        <ul style="display: flex; list-style: none; margin: 0 auto; padding: 0; flex-grow: 1; justify-content: center;">
+            <!-- <li style="margin: 0 10px;"><a href="index.html" style="text-decoration: none; color: white;">Terminal</a></li> -->
+            <li style="margin: 0 10px;"><a href="privacy.html" style="text-decoration: none; color: white;">Privacy</a></li>
+            <li style="margin: 0 10px;"><a href="news.html" style="text-decoration: none; color: white;">News</a></li>
+            <li style="margin: 0 10px;"><a href="map.html" style="text-decoration: none; color: white;">Map</a></li>
+            <li style="margin: 0 10px;"><a href="npc.html" style="text-decoration: none; color: white;">Dossier</a></li>
+            <li style="margin: 0 10px;"><a href="locations.html" style="text-decoration: none; color: white;">Locations</a></li>
+            <li style="margin: 0 10px;"><a href="scan.html" style="text-decoration: none; color: white;">Scan</a></li>
+        </ul>
+    </nav>
+    <div>
+        <style>
+            .hidden {
+                display: none;
+            }
+        </style>
+
+        <div style="display: flex; justify-content: center;">
+            <h2>Edgerunners</h2>
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <div class="row">
+            <!-- Card 1 -->
+            <div class="col-md-4 mb-3">
+                <div class="card" style="width: 18rem;" data-toggle="modal" data-target="#textModal1">
+                    <img src="kali.png" alt="Kali" class="card-img-top img-fluid">
+                    <div class="card-body">
+                        <h5 class="card-title">Kali</h5>
+                        <p class="card-text"><strong>Occupation: </strong>Fixer <br /> <strong>Location:
+                            </strong>Pegasys Bar</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="col-md-4 mb-3">
+                <div class="card" style="width: 18rem;" data-toggle="modal" data-target="#textModal2">
+                    <img src="mrshima.png" alt="Mr. Shima" class="card-img-top img-fluid">
+                    <div class="card-body">
+                        <h5 class="card-title">Mr. Shima</h5>
+                        <p class="card-text"><strong>Occupation: </strong>Exec (Corpo) <br /> <strong>Location:
+                            </strong>Arasaka HQ</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="col-md-4 mb-3">
+                <div class="card" style="width: 18rem;" data-toggle="modal" data-target="#textModal3">
+                    <img src="albatross.png" alt="Albatross" class="card-img-top img-fluid">
+                    <div class="card-body">
+                        <h5 class="card-title">Albatross</h5>
+                        <p class="card-text"><strong>Occupation: </strong>Fixer <br /> <strong>Location:
+                            </strong>Pegasys Bar</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="col-md-4 mb-3">
+                <div class="card" style="width: 18rem;" data-toggle="modal" data-target="#textModal4">
+                    <img src="nightshade2.png" alt="Nightshade" class="card-img-top img-fluid">
+                    <div class="card-body">
+                        <h5 class="card-title">Nightshade</h5>
+                        <p class="card-text"><strong>Occupation: </strong>Netrunner <br /> <strong>Location:
+                            </strong>[REDACTED]</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="col-md-4 mb-3">
+                <div class="card" style="width: 18rem;" data-toggle="modal" data-target="#textModal5">
+                    <img src="flux.png" alt="flux" class="card-img-top img-fluid">
+                    <div class="card-body">
+                        <h5 class="card-title">Flux</h5>
+                        <p class="card-text"><strong>Occupation: </strong>Medic/Bartender <br /> <strong>Location:
+                            </strong>Pegasys Bar</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="col-md-4 mb-3">
+                <div class="card" style="width: 18rem;" data-toggle="modal" data-target="#textModal6">
+                    <img src="ezekiel.png" alt="flux" class="card-img-top img-fluid">
+                    <div class="card-body">
+                        <h5 class="card-title">Agent 2517</h5>
+                        <p class="card-text"><strong>Occupation: </strong>Netrunner <br /> <strong>Location:
+                            </strong>[REDACTED]</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 7 -->
+            <div class="col-md-4 mb-3">
+                <div class="card" style="width: 18rem;" data-toggle="modal" data-target="#textModal7">
+                    <img src="nobunaga.png" alt="flux" class="card-img-top img-fluid">
+                    <div class="card-body">
+                        <h5 class="card-title">Mr. Nobunaga</h5>
+                        <p class="card-text"><strong>Occupation: </strong>Exec (Corpo) <br /> <strong>Location:
+                            </strong>Arasaka HQ</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modals for each card -->
+        <!--card 1 modal-->
+        <div class="modal fade" id="textModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <img src="kali.png" alt="Kali" class="card-img-top img-fluid">
+                        @* <h5 class="modal-title" id="exampleModalLabel"></h5> *@
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            Kali isn't just a rising star in the fixer world; she's a supernova hurtling towards
+                            dominance. Pegasys Bar isn't just her next conquest; it's her coronation throne. Imagine a
+                            woman sculpted from chrome and moonlight, draped in the hottest fashion Night City has to
+                            offer. She's all business, every inch a predator, but beneath the killer heels and designer
+                            sunglasses lurks a cunning mind colder than any cyborg.
+                        </p>
+                        <div class="ordered-list">
+                            <ul>
+                                <li><strong>Occupation: </strong>Fixer</li>
+                                <li><strong>Location: </strong>Pegasys Bar</li>
+                                <li>Tall and statuesque: A vision of elegant menace, Kali stands head and shoulders
+                                    above most, her dark eyes holding the weight of a thousand backroom deals.</li>
+                                <li>Indian heritage: High cheekbones, a sculpted jawline, and eyes that flicker with the
+                                    ancient wisdom of her ancestors.</li>
+                                <li>Fashion icon: Forget chrome and leather, Kali rocks the high-fashion edge. Think
+                                    silk saris reimagined in cyberpunk neon, saris that flow like liquid metal and
+                                    shimmer with hidden tech. Each outfit is a weapon, a calculated statement of power
+                                    and wealth.</li>
+                                <li>Augmentations: Subtle, tasteful enhancements – a retinal display that analyzes
+                                    situations before her eyes even blink, subdermal bio-tattoos that shift and pulse
+                                    with her moods, hinting at the icy depths beneath the surface.</li>
+                                <li>She moves with the grace of a predator: every step calculated, every gesture
+                                    measured, but with the latent power to strike swift and deadly.</li>
+                                <li>Her smile is a rare treasure: offered sparingly, it can disarm or freeze blood
+                                    depending on the recipient.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--card 2 modal-->
+        <div class="modal fade" id="textModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <img src="mrshima.png" alt="Mr. Shima" class="card-img-top img-fluid">
+                        @* <h5 class="modal-title" id="exampleModalLabel"></h5> *@
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            Mr. Shima is a master of the back alleys and boardrooms, navigating the murky waters between
+                            Night City's street-level fixers and the sterile chrome towers of Arasaka. He's not a corpo
+                            drone, nor a gutter-dwelling scavenger; he's the oil that keeps the gears of this twisted
+                            city turning. Imagine a character etched by equal parts grime and polish.
+                        </p>
+                        <div class="ordered-list">
+                            <ul>
+                                <li><strong>Occupation: </strong>Exec (Corpo)</li>
+                                <li><strong>Location: </strong>Arasaka HQ</li>
+                                <li>Age: Unknown, with eyes that have seen enough neon nights and backroom deals to
+                                    etch a network of fine lines around them.</li>
+                                <li>Dress: Bespoke tailored suits, always impeccably clean, but with subtle hints of his
+                                    streetwise past: a worn leather belt, a faded tattoo peeking from under the cuff.
+                                </li>
+                                <li>Augmentations: Discrete, high-end cyberware - a subdermal translator for quick
+                                    negotiations, a retinal implant for scanning contracts and hidden data streams.</li>
+                                <li>Unflappable: Night City chaos barely registers on his radar. He thrives under
+                                    pressure, his mind working like a precision clock even as the world around him
+                                    crumbles.</li>
+                                <li>A haunted past: The secrets and tragedies he's witnessed linger beneath Mr. Shima's
+                                    polished exterior. A double-cross by a fixer, a glimpse into the darkest corners of
+                                    corporate corruption – these experiences fuel his cynicism and keep him one step
+                                    ahead of everyone else.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--card 3 modal-->
+        <div class="modal fade" id="textModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <img src="albatross.png" alt="Albatross" class="card-img-top img-fluid">
+                        @* <h5 class="modal-title" id="exampleModalLabel"></h5> *@
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            Mr. Shima is a master of the back alleys and boardrooms, navigating the murky waters between
+                            Night City's street-level fixers and the sterile chrome towers of Arasaka. He's not a corpo
+                            drone, nor a gutter-dwelling scavenger; he's the oil that keeps the gears of this twisted
+                            city turning. Imagine a character etched by equal parts grime and polish.
+                        </p>
+                        <div class="ordered-list">
+                            <ul>
+                                <li><strong>Occupation: </strong>Fixer</li>
+                                <li><strong>Location: </strong>Pegasys Bar</li>
+                                <li>Age: Late 40s, with eyes that have seen enough neon nights and backroom deals to
+                                    etch a network of fine lines around them.</li>
+                                <li>Dress: Bespoke tailored suits, always impeccably clean, but with subtle hints of his
+                                    streetwise past: a worn leather belt, a faded tattoo peeking from under the cuff.
+                                </li>
+                                <li>Augmentations: Discrete, high-end cyberware - a subdermal translator for quick
+                                    negotiations, a retinal implant for scanning contracts and hidden data streams.</li>
+                                <li>Unflappable: Night City chaos barely registers on his radar. He thrives under
+                                    pressure, his mind working like a precision clock even as the world around him
+                                    crumbles.</li>
+                                <li>A haunted past: The secrets and tragedies he's witnessed linger beneath Mr. Shima's
+                                    polished exterior. A double-cross by a fixer, a glimpse into the darkest corners of
+                                    corporate corruption – these experiences fuel his cynicism and keep him one step
+                                    ahead of everyone else.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--card 4 modal-->
+        <div class="modal fade" id="textModal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <img src="nightshade2.png" alt="Mr. Shima" class="card-img-top img-fluid">
+                        @* <h5 class="modal-title" id="exampleModalLabel"></h5> *@
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            Nightshade isn't just a netrunner, she's a force of nature rampaging through the neon
+                            labyrinth of the Net. Imagine a cyberpunk Joan Jett, all leather and attitude, with a
+                            cybernetic eye that burns like a malevolent ember and a mohawk the color of midnight storms.
+                            She's a walking legend in the edgerunner scene, her past littered with daring hacks and
+                            outrageous exploits.
+                        </p>
+                        <div class="ordered-list">
+                            <ul>
+                                <li><strong>Occupation: </strong>Netrunner</li>
+                                <li><strong>Location: </strong>[REDACTED]</li>
+                                <li>Kiroshi Ruby Eye: A glowing jewel in the night, this custom implant from the tech
+                                    gods themselves scans the world with a playful glint, analyzing weaknesses and
+                                    flirting with targets in equal measure.</li>
+                                <li>Confident bordering on cocky: Nightshade knows her worth. She struts through the
+                                    underbelly like a neon queen, her head held high, radiating an aura of untouchable
+                                    brilliance. But beneath the swagger lies a sharp mind and a steely resolve.</li>
+                                <li>Loyalty on her terms: She'll stick by her crew, the motley bunch she calls family,
+                                    through firewalls and Black ICE storms. But cross her, and you'll find your data
+                                    wiped and your reputation splattered across every dark web forum in Night City.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--card 5 modal-->
+            <div class="modal fade" id="textModal5" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <img src="flux.png" alt="flux" class="card-img-top img-fluid">
+                        @* <h5 class="modal-title" id="exampleModalLabel"></h5> *@
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            Flux isn't just a bartender; she's the lifeblood of the Pegasys, a neon-drenched haven for the city's most notorious. 
+                            With a quick wit, a ready smile, and a knack for reading people, she's the heart of the bar, always ready with a drink,
+                             a joke, or a well-placed piece of information.
+                        </p>
+                        <div class="ordered-list">
+                            <ul>
+                                <li><strong>Occupation: </strong>Medic, Bartender</li>
+                                <li><strong>Location: </strong>Pegasys Bar</li>
+                                <li>What ails ya: Beneath her bubbly exterior lies a steely resolve. She's a skilled medic,
+                                     capable of patching up even the most grievous of wounds. Her knowledge of the city's 
+                                     underbelly is second to none, and she's not afraid to use it to her advantage.</li>
+                                <li>Classic Edge: Flux is a vision of cyberpunk chic, her style a blend of edgy and elegant.
+                                     She's often seen sporting a leather jacket adorned with patches and pins, paired with 
+                                     ripped jeans and combat boots. Her cybernetic implants, subtly integrated into her body, 
+                                     enhance her senses and reflexes, making her a formidable opponent..</li>
+                                <li>Kind but: Her laughter is infectious, her smile captivating. But don't be fooled by her charm.
+                                     She's a survivor, a fighter, and she's always ready to take on whatever challenges come her way</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--card 6 modal-->
+            <div class="modal fade" id="textModal6" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <img src="ezekiel.png" alt="Agent 2517" class="card-img-top img-fluid">
+                        @* <h5 class="modal-title" id="exampleModalLabel"></h5> *@
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            Unauthorized sharing of Netwatch data is prohibited.
+                        </p>
+                        <div class="ordered-list">
+                            <ul>
+                                <li><strong>Occupation: </strong>Netrunner</li>
+                                <li><strong>Location: </strong>[REDACTED]</li>
+                                <li>Unauthorized sharing of Netwatch data is prohibited.</li>
+                                <li>Unauthorized sharing of Netwatch data is prohibited.</li>
+                                <li>Unauthorized sharing of Netwatch data is prohibited.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--card 7 modal-->
+            <div class="modal fade" id="textModal7" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <img src="nobunaga.png" alt="Agent 2517" class="card-img-top img-fluid">
+                        @* <h5 class="modal-title" id="exampleModalLabel"></h5> *@
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            Unauthorized sharing of Netwatch data is prohibited.
+                        </p>
+                        <div class="ordered-list">
+                            <ul>
+                                <li><strong>Occupation: </strong>Exec (Corpo)</li>
+                                <li><strong>Location: </strong>Arasaka HQ</li>
+                                <li>Unauthorized sharing of Netwatch data is prohibited.</li>
+                                <li>Unauthorized sharing of Netwatch data is prohibited.</li>
+                                <li>Unauthorized sharing of Netwatch data is prohibited.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bootstrap JS and Popper.js (required for Bootstrap components) -->
+            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+            <script>
+                // Optional: Add this script to close the modal when clicking anywhere outside it
+                $(document).on('click', '.modal', function (e) {
+                    if ($(e.target).hasClass('modal')) {
+                        $(this).modal('hide');
+                    }
+                });
+            </script>
+        </div>
+</body>

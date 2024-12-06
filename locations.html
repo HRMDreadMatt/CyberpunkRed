@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Night City Public Terminal</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <nav style="display: flex; align-items: center; padding: 10px; background-color: #333; color: white;">
+        <!-- Left-aligned link -->
+        <a href="index.html" style="text-decoration: none; color: white; font-weight: bold; margin-right: 20px;">Terminal</a>
+        
+        <!-- Centered navigation links -->
+        <ul style="display: flex; list-style: none; margin: 0 auto; padding: 0; flex-grow: 1; justify-content: center;">
+            <!-- <li style="margin: 0 10px;"><a href="index.html" style="text-decoration: none; color: white;">Terminal</a></li> -->
+            <li style="margin: 0 10px;"><a href="privacy.html" style="text-decoration: none; color: white;">Privacy</a></li>
+            <li style="margin: 0 10px;"><a href="news.html" style="text-decoration: none; color: white;">News</a></li>
+            <li style="margin: 0 10px;"><a href="map.html" style="text-decoration: none; color: white;">Map</a></li>
+            <li style="margin: 0 10px;"><a href="npc.html" style="text-decoration: none; color: white;">Dossier</a></li>
+            <li style="margin: 0 10px;"><a href="locations.html" style="text-decoration: none; color: white;">Locations</a></li>
+            <li style="margin: 0 10px;"><a href="scan.html" style="text-decoration: none; color: white;">Scan</a></li>
+        </ul>
+    </nav>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card" onclick="showFullScreen('images/militech.png')">
+                    <img src="images/militech.png" class="card-img-top" alt="Image 1">
+                    <div class="card-body">
+                        <h5 class="card-title">Image 1</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card" onclick="showFullScreen('images/militech.png')">
+                    <img src="images/militech.png" class="card-img-top" alt="Image 2">
+                    <div class="card-body">
+                        <h5 class="card-title">Image 2</h5>
+                    </div>
+                </div>
+            </div>
+            <!-- Add more cards as needed -->
+        </div>
+    </div>
+    
+    
+    <div id="fullscreen" onclick="hideFullScreen()">
+        <img id="fullscreen-image" src="" alt="Fullscreen Image">
+    </div>
+    
+    <script>
+        function showFullScreen(imageUrl) {
+            document.getElementById('fullscreen-image').src = imageUrl;
+            document.getElementById('fullscreen').style.display = 'block';
+        }
+    
+        function hideFullScreen() {
+            document.getElementById('fullscreen').style.display = 'none';
+        }
+    
+    </script>
+
+    </body>
+    </html>

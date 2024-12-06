@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Night City Public Terminal</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <nav style="display: flex; align-items: center; padding: 10px; background-color: #333; color: white;">
+        <!-- Left-aligned link -->
+        <a href="index.html" style="text-decoration: none; color: white; font-weight: bold; margin-right: 20px;">Terminal</a>
+        
+        <!-- Centered navigation links -->
+        <ul style="display: flex; list-style: none; margin: 0 auto; padding: 0; flex-grow: 1; justify-content: center;">
+            <!-- <li style="margin: 0 10px;"><a href="index.html" style="text-decoration: none; color: white;">Terminal</a></li> -->
+            <li style="margin: 0 10px;"><a href="privacy.html" style="text-decoration: none; color: white;">Privacy</a></li>
+            <li style="margin: 0 10px;"><a href="news.html" style="text-decoration: none; color: white;">News</a></li>
+            <li style="margin: 0 10px;"><a href="map.html" style="text-decoration: none; color: white;">Map</a></li>
+            <li style="margin: 0 10px;"><a href="npc.html" style="text-decoration: none; color: white;">Dossier</a></li>
+            <li style="margin: 0 10px;"><a href="locations.html" style="text-decoration: none; color: white;">Locations</a></li>
+            <li style="margin: 0 10px;"><a href="scan.html" style="text-decoration: none; color: white;">Scan</a></li>
+        </ul>
+    </nav>
+    <div>
+        <div class="metric-container" id="loadTimeMetric">
+            <h2>Scan Time</h2>
+            <p id="loadTime" class="typing-effect"></p>
+        </div>
+
+        <div class="metric-container" id="browserInfoMetric">
+            <h2>Agent Information</h2>
+            <p id="browserInfo" class="typing-effect"></p>
+        </div>
+
+        <div class="metric-container" id="deviceMemoryMetric">
+            <h2>Device Memory</h2>
+            <p id="deviceMemory" class="typing-effect"></p>
+        </div>
+
+        <div class="metric-container" id="languageMemoryMetric">
+            <h2>Language</h2>
+            <p id="languageMemory" class="typing-effect"></p>
+        </div>
+
+        <div class="metric-container" id="locationMemoryMetric">
+            <h2>Location</h2>
+            <p id="locationMemory" class="typing-effect"></p>
+        </div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                // Scan Time
+                var loadEventEnd = Date.now();
+
+                // other metrics
+                var browserInfo = "Agent Version: " + navigator.userAgent;
+
+                var deviceMemory = "Device Memory: " + (navigator.deviceMemory || "N/A");
+
+                var language = navigator.language;
+
+                var location = "Night City";
+
+                // Metrics array - must match HTML
+                var metrics = [
+                    "Scan time: " + loadEventEnd + " milliseconds",
+                    browserInfo,
+                    deviceMemory,
+                    "Language: " + language,
+                    "Location: " + location,
+                ];
+
+                // Display metrics one at a time with a delay
+                var index = 0;
+                function displayNextMetric() {
+                    if (index < metrics.length) {
+                        var currentMetric = metrics[index];
+                        var currentElement = document.querySelectorAll(".typing-effect")[index];
+                        simulateTyping(currentElement, currentMetric);
+                        index++;
+                    }
+                }
+
+                // Call the function with a delay between each metric
+                setInterval(displayNextMetric, 500); // Adjust the delay (milliseconds)
+            });
+
+            function simulateTyping(element, text) {
+                var index = 0;
+                var typingInterval = setInterval(function () {
+                    element.innerHTML += text.charAt(index);
+                    index++;
+                    if (index > text.length) {
+                        clearInterval(typingInterval);
+                    }
+                }, 30); // Adjust the typing speed (milliseconds)
+            }
+        </script>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

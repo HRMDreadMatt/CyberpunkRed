@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Night City Public Terminal</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .ping {
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background-color: red;
+            animation: ping 1s ease-out;
+            z-index: 9999;
+        }
+
+        @keyframes ping {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+
+            70% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <script src="script.js"></script>
+    <nav style="display: flex; align-items: center; padding: 10px; background-color: #333; color: white;">
+        <a href="index.html"
+            style="text-decoration: none; color: white; font-weight: bold; margin-right: 20px;">Terminal</a>
+
+        <ul style="display: flex; list-style: none; margin: 0 auto; padding: 0; flex-grow: 1; justify-content: center;">
+            <li style="margin: 0 10px;"><a href="privacy.html" style="text-decoration: none; color: white;">Privacy</a>
+            </li>
+            <li style="margin: 0 10px;"><a href="news.html" style="text-decoration: none; color: white;">News</a></li>
+            <li style="margin: 0 10px;"><a href="map.html" style="text-decoration: none; color: white;">Map</a></li>
+            <li style="margin: 0 10px;"><a href="npc.html" style="text-decoration: none; color: white;">Dossier</a></li>
+            <li style="margin: 0 10px;"><a href="locations.html"
+                    style="text-decoration: none; color: white;">Locations</a></li>
+            <li style="margin: 0 10px;"><a href="scan.html" style="text-decoration: none; color: white;">Scan</a></li>
+        </ul>
+    </nav>
+
+    <div>
+        <header class="text-center">
+            <h2>Districts of Night City</h2>
+        </header>
+        <div class="container">
+            <div class="row justify-content-center">
+                <img src="NightCityMap.jpg" alt="Map" class="img-fluid" />
+            </div>
+        </div>
+        <br />
+        <div>
+            <p> Made available for public use by Night Corp.</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('click', (event) => {
+  const x = event.clientX;
+  const y = event.clientY;
+
+  const ping = document.createElement('div');
+  ping.classList.add('ping');
+  ping.style.left = `${x}px`;
+  ping.style.top = `${y}px`;
+
+  document.body.appendChild(ping);
+
+  ping.addEventListener('animationend', () => {
+    ping.remove();
+  });
+});
+    </script>
+</body>
+
+</html>

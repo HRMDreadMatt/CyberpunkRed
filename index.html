@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Night City Public Terminal</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <nav style="display: flex; align-items: center; padding: 10px; background-color: #333; color: white;">
+        <!-- Left-aligned link -->
+        <a href="index.html" style="text-decoration: none; color: white; font-weight: bold; margin-right: 20px;">Terminal</a>
+        
+        <!-- Centered navigation links -->
+        <ul style="display: flex; list-style: none; margin: 0 auto; padding: 0; flex-grow: 1; justify-content: center;">
+            <!-- <li style="margin: 0 10px;"><a href="index.html" style="text-decoration: none; color: white;">Terminal</a></li> -->
+            <li style="margin: 0 10px;"><a href="privacy.html" style="text-decoration: none; color: white;">Privacy</a></li>
+            <li style="margin: 0 10px;"><a href="news.html" style="text-decoration: none; color: white;">News</a></li>
+            <li style="margin: 0 10px;"><a href="map.html" style="text-decoration: none; color: white;">Map</a></li>
+            <li style="margin: 0 10px;"><a href="npc.html" style="text-decoration: none; color: white;">Dossier</a></li>
+            <li style="margin: 0 10px;"><a href="locations.html" style="text-decoration: none; color: white;">Locations</a></li>
+            <li style="margin: 0 10px;"><a href="scan.html" style="text-decoration: none; color: white;">Scan</a></li>
+        </ul>
+    </nav>
+    
+    <div style="display:none;" id="container" class="animate-bottom"></div>
+    <div style="padding-bottom: 20px; padding-top: 30px;">
+        <img src="nightcitylogo.jpg" class="rounded-circle" />
+    </div>
+    <div>
+        <h2>Welcome to the Night City public subnet</h2>
+    </div>
+    <div style="padding-bottom: 40px; padding-top: 20px;">
+    <p> Made available for public use by Night Corp.</p>
+    <p> Please consider donating to the Richard Night Foundation to help keep our City of Dreams beautiful.</p>
+    </div>
+
+    <footer class="border-top footer text-muted"></footer>
+    <div class="container">
+        <marquee behavior="scroll" direction="left" style="color:red">|| Ziggurat Group Announces Space Elevator
+            Project: The mega-corporation plans to build a space elevator,
+            promising a new era of space travel and resource exploitation. || Night City Fashion Week: Renowned designer
+            Mako Takahashi unveils a collection blending futuristic techwear with traditional Japanese aesthetics. ||
+            Trauma Team Faces Lawsuits: Families of clients demand accountability as Trauma Team International faces
+            accusations of negligence during high-risk extractions. || Corporate Sabotage at Petrochem Facility:
+            Petrochem accuses rival corporations of sabotage after a refinery explosion causes a major oil spill in the
+            Pacific Ocean || NCPD Crackdown on Ripperdoc Clinics: Night City Police Department initiates a city-wide
+            operation targeting unlicensed ripperdoc clinics, claiming they contribute to the rise in cyberpsychosis. ||
+            New Drug Hits the Streets: "Verve" promises heightened awareness and reflexes, but authorities warn of
+            dangerous side effects and addiction. || Weather Report: "Acid rain advisory in effect for Night City's
+            western districts. Expect poor visibility and increased cybernetic corrosion. </marquee><a asp-area=""
+            asp-controller="Home" asp-action="Privacy"></a>
+    </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

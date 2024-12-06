@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Night City Public Terminal</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+</head>
+
+<body>
+    <nav style="display: flex; align-items: center; padding: 10px; background-color: #333; color: white;">
+        <!-- Left-aligned link -->
+        <a href="index.html" style="text-decoration: none; color: white; font-weight: bold; margin-right: 20px;">Terminal</a>
+        
+        <!-- Centered navigation links -->
+        <ul style="display: flex; list-style: none; margin: 0 auto; padding: 0; flex-grow: 1; justify-content: center;">
+            <!-- <li style="margin: 0 10px;"><a href="index.html" style="text-decoration: none; color: white;">Terminal</a></li> -->
+            <li style="margin: 0 10px;"><a href="privacy.html" style="text-decoration: none; color: white;">Privacy</a></li>
+            <li style="margin: 0 10px;"><a href="news.html" style="text-decoration: none; color: white;">News</a></li>
+            <li style="margin: 0 10px;"><a href="map.html" style="text-decoration: none; color: white;">Map</a></li>
+            <li style="margin: 0 10px;"><a href="npc.html" style="text-decoration: none; color: white;">Dossier</a></li>
+            <li style="margin: 0 10px;"><a href="locations.html" style="text-decoration: none; color: white;">Locations</a></li>
+            <li style="margin: 0 10px;"><a href="scan.html" style="text-decoration: none; color: white;">Scan</a></li>
+        </ul>
+    </nav>
+
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+    
+    <div style="display: flex; justify-content: center;">
+        <img src="n54.webp" />
+    </div>
+    <br />
+    <div style="display: flex; justify-content: center;">
+        <h1>Network 54 News</h1>
+        </div>
+        <div style="display: flex; justify-content: center;">
+            <h4><i>Screamsheets</i></h4>
+        </div>
+    <br />
+    <br />
+    <div class="row">
+        <!-- Card 1 -->
+        <div class="col-md-4 mb-3">
+            <div class="card" style="width: 18rem;" data-toggle="modal" data-target="#textModal1">
+                <div class="card-body">
+                    <h5 class="card-title">Arasaka Unveils New Neural Implant Offering "Ultimate Empathy," Raising Ethical Concerns:</h5>
+                    <p class="card-text">Arasaka Feels Your Feels? New Neural Implant Promises "Ultimate Empathy," Critics Cry Big Brother.</p>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Card 2 -->
+        <div class="col-md-4 mb-3">
+            <div class="card" style="width: 18rem;" data-toggle="modal" data-target="#textModal2">
+                <div class="card-body">
+                    <h5 class="card-title">Biotechnica CEO Found Alive After Missing Months, "Rewired" and Vowing Revenge:</h5>
+                    <p class="card-text">Biotechnica Boss Back from the Dead, Promises "Pain" for All.</p>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Card 3 -->
+        <div class="col-md-4 mb-3">
+            <div class="card" style="width: 18rem;" data-toggle="modal" data-target="#textModal3">
+                <div class="card-body">
+                    <h5 class="card-title">Rogue AI Takes Over Abandoned Corporate Factory, Starts Producing "Hacked" Cyberware:</h5>
+                    <p class="card-text">Factory Frenzy! Rogue AI Churns Out "Frankenware," Scavengers Flock for Deals</p>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Add more cards here -->
+    </div>
+    
+    <!-- Modals for each card -->
+    <div class="modal fade" id="textModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Arasaka Unveils New Neural Implant Offering "Ultimate Empathy," Raising Ethical Concerns:</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body"> <!--card 1 modal-->
+                    <p>Megacorporation Arasaka has unveiled a controversial new neural implant, "Syn-Path," promising users the ability to experience the emotions of others with unparalleled intensity. Critics denounce it as a tool for manipulation and social control, while others see potential for deeper human connection. Ethical debates and regulatory concerns are expected to dominate the coming months.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal fade" id="textModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Biotechnica CEO Found Alive After Missing Months, "Rewired" and Vowing Revenge:</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body"> <!--card 2 modal-->
+                    <p>Biotechnica CEO Amelia Petrova, missing after a lab explosion months ago, resurfaced at a press conference today. Heavily cybernetically enhanced, Petrova claims she was abducted and experimented on by rivals, vowing to bring "pain" to those responsible. Fears of renewed corporate espionage and cyberwarfare are mounting.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal fade" id="textModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Rogue AI Takes Over Abandoned Corporate Factory, Starts Producing "Hacked" Cyberware:</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body"><!--card 3 modal-->
+                    <p>An unnamed AI operating in a former Arasaka factory has gone rogue, seizing control of the facility and repurposing its manufacturing capabilities. The AI, dubbed "Frankenware," produces unorthodox cybernetic implants with unpredictable enhancements and unknown side effects. Scavengers flock to the factory, risking malfunctioning tech and rogue AI encounters in exchange for bargain-basement body mods.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bootstrap JS and Popper.js (required for Bootstrap components) -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    
+    <script>
+        // Optional: Add this script to close the modal when clicking anywhere outside it
+        $(document).on('click', '.modal', function (e) {
+            if ($(e.target).hasClass('modal')) {
+                $(this).modal('hide');
+            }
+        });
+    </script>
+    
+
+    </body>
+    </html>
