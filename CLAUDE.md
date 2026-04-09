@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a static HTML/CSS/JS website themed as a "Night City Public Terminal" — a prop/companion site for a Cyberpunk TTRPG campaign set in the Cyberpunk RED universe. No build system, bundler, or package manager is used. Open any `.html` file directly in a browser to view it.
+Hey Choom! This is a static HTML/CSS/JS website themed as a "Night City Public Terminal" — a prop/companion site for a Cyberpunk TTRPG campaign set in the Cyberpunk RED universe. No build system, bundler, or package manager is used. Open any `.html` file directly in a browser to view it.
 
 ## Architecture
 
