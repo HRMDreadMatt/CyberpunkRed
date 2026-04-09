@@ -1,93 +1,219 @@
-body{
-    font-family: monospace;
-    color: black;
-    align-items: center;
-    margin: 0;
-    padding: 0;
-    text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+/* ── Color tokens ─────────────────────────────────────────── */
+:root {
+    --bg:           #0a0a0a;
+    --text:         #9fefb3;
+    --accent:       #00ff41;
+    --accent-glow:  0 0 8px rgba(0, 255, 65, 0.65);
+    --accent-dim:   rgba(0, 255, 65, 0.3);
+    --nav-bg:       #060f06;
+    --card-bg:      #0d160d;
+    --border:       rgba(0, 255, 65, 0.35);
+    --warn:         #ffb000;
+    --dead:         #ff3333;
 }
 
+/* ── Reset ────────────────────────────────────────────────── */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+    font-size: 16px;
+}
+
+/* ── Base ─────────────────────────────────────────────────── */
+body {
+    font-family: 'Share Tech Mono', monospace;
+    background-color: var(--bg);
+    color: var(--text);
+    margin: 0 0 60px;
+    padding: 0;
+    text-align: center;
+    overflow-x: hidden;
+    animation: flicker 12s infinite;
+}
+
+/* Subtle screen flicker — blinks briefly every ~12s */
+@keyframes flicker {
+    0%, 89%, 91%, 93%, 100% { opacity: 1; }
+    90%  { opacity: 0.96; }
+    92%  { opacity: 0.99; }
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--accent);
+    text-shadow: var(--accent-glow);
+}
+
+a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+a:hover {
+    color: #fff;
+    text-shadow: var(--accent-glow);
+    text-decoration: none;
+}
+
+/* ── Navigation ───────────────────────────────────────────── */
+/* !important needed to override the inline background/color on every page's nav */
+nav {
+    background-color: var(--nav-bg) !important;
+    border-bottom: 1px solid var(--border);
+}
+
+nav a {
+    color: var(--accent) !important;
+    text-decoration: none;
+    padding: 5px 8px;
+    border-radius: 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.85rem;
+    transition: background-color 0.15s, color 0.15s;
+}
+
+nav a:hover {
+    background-color: var(--accent) !important;
+    color: var(--bg) !important;
+    text-shadow: none;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex-wrap: wrap;
+    gap: 4px 0;
+}
+
+nav li {
+    display: inline-block;
+    margin-right: 4px;
+}
+
+/* ── Layout ───────────────────────────────────────────────── */
 .container {
-    width: 80%; /* Adjust the width as needed */
+    width: 90%;
+    max-width: 1100px;
+    padding: 0 1rem;
     margin: 0 auto;
 }
 
-/* Personal Scan text */
+.row {
+    justify-content: center;
+}
+
+/* ── Bootstrap card overrides ─────────────────────────────── */
+.card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 0 14px rgba(0, 255, 65, 0.25);
+}
+
+.card-title {
+    color: var(--accent);
+    text-shadow: var(--accent-glow);
+}
+
+.card-text, .card-body {
+    color: var(--text);
+}
+
+/* ── Bootstrap modal overrides ────────────────────────────── */
+.modal-content {
+    background-color: var(--card-bg);
+    border: 1px solid var(--accent);
+    box-shadow: 0 0 30px rgba(0, 255, 65, 0.2);
+    color: var(--text);
+}
+
+.modal-header {
+    border-bottom: 1px solid var(--border);
+}
+
+.modal-footer {
+    border-top: 1px solid var(--border);
+}
+
+.close {
+    color: var(--accent);
+    text-shadow: none;
+    opacity: 0.8;
+}
+
+.close:hover {
+    color: #fff;
+    opacity: 1;
+}
+
+/* ── Scan page typing effect ──────────────────────────────── */
 .metric-container {
     margin-bottom: 20px;
     overflow: hidden;
+    padding: 0 1rem;
 }
 
 .typing-effect {
     display: inline-block;
     white-space: nowrap;
     overflow: hidden;
-    border-right: 0px solid #000; /* Adjust the color of the typing cursor */
-    animation: typing 1.5s steps(40, end) forwards; /* Faster typing without blinking */
+    color: var(--accent);
+    animation: typing 1.5s steps(40, end) forwards;
 }
 
 @keyframes typing {
-    from {
-        width: 0;
-    }
-
-    to {
-        width: 100%;
-    }
+    from { width: 0; }
+    to   { width: 100%; }
 }
 
-/* Sticky footer styles */
-@media (min-width: 768px) {
-    html {
-        font-size: 16px;
+@media (max-width: 600px) {
+    .typing-effect {
+        white-space: normal;
+        animation: none;
+        width: auto;
     }
 }
 
-.border-top {
-    border-top: 1px solid #e5e5e5;
-}
-
-.border-bottom {
-    border-bottom: 1px solid #e5e5e5;
-}
-
-.box-shadow {
-    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-}
-
-/* Sticky footer styles */
-html {
-    position: relative;
-    min-height: 100%;
-}
-
-body {
-    /* Margin bottom by footer height */
-    margin-bottom: 60px;
-}
-
-img.news {
-    height: auto;
-    width: auto;
-    padding: 5px;
-}
+/* ── Footer ───────────────────────────────────────────────── */
+.border-top    { border-top:    1px solid var(--border); }
+.border-bottom { border-bottom: 1px solid var(--border); }
+.box-shadow    { box-shadow: 0 .25rem .75rem rgba(0, 255, 65, .08); }
 
 .footer {
     position: absolute;
     bottom: 0;
     width: 100%;
     white-space: nowrap;
-    line-height: 60px; /* Vertically center the text there */
+    line-height: 60px;
+    border-top: 1px solid var(--border);
 }
 
-/* Spinner */
+/* ── Spinner ──────────────────────────────────────────────── */
 .spin-container {
     text-align: center;
     margin-top: 100px;
 }
 
 .spin {
-    border: 5px solid #000000;
+    border: 5px solid var(--accent);
     width: 200px;
     height: 200px;
     margin: 0 auto;
@@ -98,61 +224,39 @@ img.news {
 }
 
 #loader2 {
-    border: 5px solid #000000;
-    width: 220px;
-    height: 220px;
-    position: relative;
-    top: -216px;
+    border: 5px solid var(--accent);
+    width: 220px; height: 220px;
+    position: relative; top: -216px;
     border-left-color: transparent;
     border-right-color: transparent;
     animation: rotate2 2s cubic-bezier(0.26, 1.36, 0.74, -0.29) infinite;
 }
 
 #loader3 {
-    border: 5px solid #000000;
-    width: 240px;
-    height: 240px;
-    position: relative;
-    top: -452px;
+    border: 5px solid var(--accent);
+    width: 240px; height: 240px;
+    position: relative; top: -452px;
     border-left-color: transparent;
     border-right-color: transparent;
     animation: rotate 2s cubic-bezier(0.26, 1.36, 0.74, -0.29) infinite;
 }
 
 #loader4 {
-    border: 5px solid #000000;
-    width: 260px;
-    height: 260px;
-    position: relative;
-    top: -708px;
+    border: 5px solid var(--accent);
+    width: 260px; height: 260px;
+    position: relative; top: -708px;
     border-left-color: transparent;
     border-right-color: transparent;
     animation: rotate2 2s cubic-bezier(0.26, 1.36, 0.74, -0.29) infinite;
 }
 
-@keyframes rotate {
-    0% {
-        transform: rotateZ(-360deg)
-    }
+@keyframes rotate  { 0% { transform: rotateZ(-360deg); } 100% { transform: rotateZ(0deg); } }
+@keyframes rotate2 { 0% { transform: rotateZ(360deg);  } 100% { transform: rotateZ(0deg); } }
 
-    100% {
-        transform: rotateZ(0deg)
-    }
-}
-
-@keyframes rotate2 {
-    0% {
-        transform: rotateZ(360deg)
-    }
-
-    100% {
-        transform: rotateZ(0deg)
-    }
-}
-
+/* ── Misc ─────────────────────────────────────────────────── */
 #text {
-    color: #000000;
-    font-family: Cyber;
+    color: var(--accent);
+    font-family: 'Share Tech Mono', monospace;
     font-size: 20px;
     position: relative;
     top: -857px;
@@ -160,34 +264,12 @@ img.news {
 
 .animate-bottom {
     position: relative;
-    -webkit-animation-name: animatebottom;
-    -webkit-animation-duration: 1s;
-    animation-name: animatebottom;
-    animation-duration: 1s
-}
-
-@-webkit-keyframes animatebottom {
-    from {
-        bottom: -100px;
-        opacity: 0
-    }
-
-    to {
-        bottom: 0px;
-        opacity: 1
-    }
+    animation: animatebottom 1s;
 }
 
 @keyframes animatebottom {
-    from {
-        bottom: -100px;
-        opacity: 0
-    }
-
-    to {
-        bottom: 0;
-        opacity: 1
-    }
+    from { bottom: -100px; opacity: 0; }
+    to   { bottom: 0;      opacity: 1; }
 }
 
 #container {
@@ -195,38 +277,14 @@ img.news {
     text-align: center;
 }
 
-/* Marquee */
 #marquee {
     background: transparent;
     overflow: hidden;
     position: relative;
 }
 
-
-
-nav {
-    background-color: #333;
-    padding: 10px;
-}
-
-nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-nav li {
-    display: inline-block;
-    margin-right: 10px;
-}
-
-nav a {
-    color: white;
-    text-decoration: none;
+img.news {
+    height: auto;
+    width: auto;
     padding: 5px;
-    border-radius: 5px;
-}
-
-nav a:hover {
-    background-color: #444;
 }

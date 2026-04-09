@@ -2,39 +2,23 @@
 <html>
 
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Night City Public Terminal</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        .ping {
-            position: absolute;
-            width: 25px;
-            height: 25px;
+        .ping-ring {
+            position: fixed;
             border-radius: 50%;
-            background-color: red;
-            animation: ping 1s ease-out;
+            border: 2px solid var(--accent);
+            box-shadow: 0 0 6px var(--accent);
+            pointer-events: none;
+            transform: translate(-50%, -50%);
             z-index: 9999;
-        }
-
-        @keyframes ping {
-            0% {
-                transform: scale(0);
-                opacity: 1;
-            }
-
-            70% {
-                opacity: 1;
-            }
-
-            100% {
-                transform: scale(1.5);
-                opacity: 0;
-            }
         }
     </style>
 </head>
 
 <body>
-    <script src="script.js"></script>
     <nav style="display: flex; align-items: center; padding: 10px; background-color: #333; color: white;">
         <a href="index.html"
             style="text-decoration: none; color: white; font-weight: bold; margin-right: 20px;">Terminal</a>
@@ -51,38 +35,46 @@
         </ul>
     </nav>
 
-    <div>
-        <header class="text-center">
-            <h2>Districts of Night City</h2>
-        </header>
-        <div class="container">
-            <div class="row justify-content-center">
-                <img src="NightCityMap.jpg" alt="Map" class="img-fluid" />
-            </div>
-        </div>
-        <br />
-        <div>
-            <p> Made available for public use by Night Corp.</p>
+    <h2 style="margin: 2rem 0 1rem;">Districts of Night City</h2>
+    <div class="container">
+        <div class="row justify-content-center">
+            <img src="images/NightCityMap.jpg" alt="Map" class="img-fluid" />
         </div>
     </div>
+    <p style="margin-top: 1rem;">Made available for public use by Night Corp.</p>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <script>
         document.addEventListener('click', (event) => {
-  const x = event.clientX;
-  const y = event.clientY;
+            const x = event.clientX;
+            const y = event.clientY;
 
-  const ping = document.createElement('div');
-  ping.classList.add('ping');
-  ping.style.left = `${x}px`;
-  ping.style.top = `${y}px`;
+            const rings = Array.from({ length: 3 }, () => {
+                const ring = document.createElement('div');
+                ring.className = 'ping-ring';
+                ring.style.left = x + 'px';
+                ring.style.top  = y + 'px';
+                ring.style.width  = '0px';
+                ring.style.height = '0px';
+                document.body.appendChild(ring);
+                return ring;
+            });
 
-  document.body.appendChild(ping);
-
-  ping.addEventListener('animationend', () => {
-    ping.remove();
-  });
-});
+            anime({
+                targets: rings,
+                width:  ['0px', '90px'],
+                height: ['0px', '90px'],
+                opacity: [1, 0],
+                borderWidth: ['3px', '1px'],
+                delay: anime.stagger(130),
+                duration: 750,
+                easing: 'easeOutExpo',
+                complete: () => rings.forEach(r => r.remove())
+            });
+        });
     </script>
+
+    <script src="script.js"></script>
 </body>
 
 </html>

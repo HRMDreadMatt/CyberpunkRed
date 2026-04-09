@@ -2,19 +2,17 @@
 <html>
 
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Night City Public Terminal</title>
-    <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
     <nav style="display: flex; align-items: center; padding: 10px; background-color: #333; color: white;">
-        <!-- Left-aligned link -->
         <a href="index.html" style="text-decoration: none; color: white; font-weight: bold; margin-right: 20px;">Terminal</a>
-        
-        <!-- Centered navigation links -->
+
         <ul style="display: flex; list-style: none; margin: 0 auto; padding: 0; flex-grow: 1; justify-content: center;">
-            <!-- <li style="margin: 0 10px;"><a href="index.html" style="text-decoration: none; color: white;">Terminal</a></li> -->
             <li style="margin: 0 10px;"><a href="privacy.html" style="text-decoration: none; color: white;">Privacy</a></li>
             <li style="margin: 0 10px;"><a href="news.html" style="text-decoration: none; color: white;">News</a></li>
             <li style="margin: 0 10px;"><a href="map.html" style="text-decoration: none; color: white;">Map</a></li>
@@ -24,25 +22,25 @@
         </ul>
     </nav>
 
-    <style>
-        .hidden {
-            display: none;
-        }
-    </style>
-    
-    <div style="display: flex; justify-content: center;">
-        <img src="n54.webp" />
+    <div style="margin: 1.5rem 0 0.5rem;">
+        <img src="images/n54.webp" alt="Network 54" />
     </div>
+    <h1>Network 54 News</h1>
+    <h4><i>Screamsheets</i></h4>
     <br />
-    <div style="display: flex; justify-content: center;">
-        <h1>Network 54 News</h1>
-        </div>
-        <div style="display: flex; justify-content: center;">
-            <h4><i>Screamsheets</i></h4>
-        </div>
-    <br />
-    <br />
+
     <div class="row">
+        <!-- Breaking News Card -->
+        <div class="col-12 mb-3">
+            <div class="card" style="border: 2px solid #ff3333; box-shadow: 0 0 18px rgba(255, 51, 51, 0.45); cursor: pointer;" data-toggle="modal" data-target="#textModal7">
+                <div class="card-body">
+                    <span style="background-color: #ff3333; color: #0a0a0a; font-weight: bold; font-size: 0.7rem; letter-spacing: 2px; padding: 2px 8px; margin-right: 10px; vertical-align: middle;">&#9646; BREAKING</span>
+                    <h5 class="card-title d-inline" style="color: #ff3333; text-shadow: 0 0 10px rgba(255,51,51,0.6); vertical-align: middle;">Night City Derby — Geoffroi Deschandeliers of Neo-France Claims Gold Cup in Stunning Upset, Then Promptly Empties His Stomach on the Podium</h5>
+                    <p class="card-text" style="margin-top: 0.75rem;">An outsider on an unsponsored mount beats six Biotechnica-backed thoroughbreds to take the cup. The beachfront oysters, however, did not finish second.</p>
+                </div>
+            </div>
+        </div>
+
         <!-- Card 1 -->
         <div class="col-md-4 mb-3">
             <div class="card" style="width: 18rem;" data-toggle="modal" data-target="#textModal4">
@@ -52,7 +50,8 @@
                 </div>
             </div>
         </div>
-        <!-- Card 1 -->
+
+        <!-- Card 2 -->
         <div class="col-md-4 mb-3">
             <div class="card" style="width: 18rem;" data-toggle="modal" data-target="#textModal1">
                 <div class="card-body">
@@ -61,8 +60,8 @@
                 </div>
             </div>
         </div>
-    
-        <!-- Card 2 -->
+
+        <!-- Card 3 -->
         <div class="col-md-4 mb-3">
             <div class="card" style="width: 18rem;" data-toggle="modal" data-target="#textModal2">
                 <div class="card-body">
@@ -71,8 +70,8 @@
                 </div>
             </div>
         </div>
-    
-        <!-- Card 3 -->
+
+        <!-- Card 4 -->
         <div class="col-md-4 mb-3">
             <div class="card" style="width: 18rem;" data-toggle="modal" data-target="#textModal3">
                 <div class="card-body">
@@ -81,89 +80,176 @@
                 </div>
             </div>
         </div>
-    
-        <!-- Add more cards here -->
+
+        <!-- Card 5 -->
+        <div class="col-md-4 mb-3">
+            <div class="card" style="width: 18rem;" data-toggle="modal" data-target="#textModal5">
+                <div class="card-body">
+                    <h5 class="card-title">NetWatch Issues Level-3 Blackwall Warning After Massive Data Spike Detected Over Watson:</h5>
+                    <p class="card-text">Rogue signals light up the subnet. NetWatch scrambles response teams as something stirs behind the Blackwall.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="col-md-4 mb-3">
+            <div class="card" style="width: 18rem;" data-toggle="modal" data-target="#textModal6">
+                <div class="card-body">
+                    <h5 class="card-title">Militech Arms Cache Raided in Pacifica — Corporate Security Suspects Inside Job:</h5>
+                    <p class="card-text">Millions in military-grade hardware walks out the door. Someone on the inside knew exactly where to look.</p>
+                </div>
+            </div>
+        </div>
     </div>
-    
-    <!-- Modals for each card -->
-    <div class="modal fade" id="textModal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    <!-- Modals -->
+
+    <div class="modal fade" id="textModal4" tabindex="-1" role="dialog" aria-labelledby="modal4Label" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Chaos at The Glen, South Night City boarder prompts NCPD investigation</h5>
+                    <h5 class="modal-title" id="modal4Label">Chaos at The Glen, South Night City boarder prompts NCPD investigation</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body"> <!--card 1 modal-->
+                <div class="modal-body">
                     <p>NCPD responded to a disturbance At Prospect and Ventura Street in The Glen on Friday, near the boarder of South Night City. Shouting and very loud music was heard shorty before a large group of 50-70 people began a violent spree - including battery, property damage, riding motorcycles up and down the street, and firing guns. 3 deaths and 7 injuries resulted, 2 of those still in critical condition. NCPD has increased their presence in the immediate area and have gone as far as to include MAXTAC to be on the lookout for gang activity and cyberpsychos. No curfue for the district has been set.<br> - Naomi Wu, 6/23/2045</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="modal fade" id="textModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="textModal1" tabindex="-1" role="dialog" aria-labelledby="modal1Label" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Arasaka Unveils New Neural Implant Offering "Ultimate Empathy," Raising Ethical Concerns:</h5>
+                    <h5 class="modal-title" id="modal1Label">Arasaka Unveils New Neural Implant Offering "Ultimate Empathy," Raising Ethical Concerns:</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body"> <!--card 1 modal-->
+                <div class="modal-body">
                     <p>Megacorporation Arasaka has unveiled a controversial new neural implant, "Syn-Path," promising users the ability to experience the emotions of others with unparalleled intensity. Critics denounce it as a tool for manipulation and social control, while others see potential for deeper human connection. Ethical debates and regulatory concerns are expected to dominate the coming months. <br> - Duke Raoul, 6/20/2045</p>
                 </div>
             </div>
         </div>
     </div>
-    
-    <div class="modal fade" id="textModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    <div class="modal fade" id="textModal2" tabindex="-1" role="dialog" aria-labelledby="modal2Label" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Biotechnica CEO Found Alive After Missing Months, "Rewired" and Vowing Revenge:</h5>
+                    <h5 class="modal-title" id="modal2Label">Biotechnica CEO Found Alive After Missing Months, "Rewired" and Vowing Revenge:</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body"> <!--card 2 modal-->
+                <div class="modal-body">
                     <p>Biotechnica CEO Amelia Petrova, missing after a lab explosion months ago, resurfaced at a press conference today. Heavily cybernetically enhanced, Petrova claims she was abducted and experimented on by rivals, vowing to bring "pain" to those responsible. Fears of renewed corporate espionage and cyberwarfare are mounting. <br> - Naomi Wu, 6/19/2045</p>
                 </div>
             </div>
         </div>
     </div>
-    
-    <div class="modal fade" id="textModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    <div class="modal fade" id="textModal3" tabindex="-1" role="dialog" aria-labelledby="modal3Label" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Rogue AI Takes Over Abandoned Corporate Factory, Starts Producing "Hacked" Cyberware:</h5>
+                    <h5 class="modal-title" id="modal3Label">Rogue AI Takes Over Abandoned Corporate Factory, Starts Producing "Hacked" Cyberware:</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body"><!--card 3 modal-->
+                <div class="modal-body">
                     <p>An unnamed AI operating in a former Arasaka factory has gone rogue, seizing control of the facility and repurposing its manufacturing capabilities. The AI, dubbed "Frankenware," produces unorthodox cybernetic implants with unpredictable enhancements and unknown side effects. Scavengers flock to the factory, risking malfunctioning tech and rogue AI encounters in exchange for bargain-basement body mods. <br> - Duke Raoul, 6/17/2045</p>
                 </div>
             </div>
         </div>
     </div>
-    
-    <!-- Bootstrap JS and Popper.js (required for Bootstrap components) -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    
+
+    <div class="modal fade" id="textModal7" tabindex="-1" role="dialog" aria-labelledby="modal7Label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content" style="border-color: #ff3333; box-shadow: 0 0 24px rgba(255, 51, 51, 0.35);">
+                <div class="modal-header" style="border-bottom-color: rgba(255,51,51,0.4);">
+                    <span style="background-color: #ff3333; color: #0a0a0a; font-weight: bold; font-size: 0.7rem; letter-spacing: 2px; padding: 2px 8px; margin-right: 10px;">&#9646; BREAKING</span>
+                    <h5 class="modal-title" id="modal7Label" style="color: #ff3333; text-shadow: 0 0 8px rgba(255,51,51,0.5);">Night City Derby: Neo-France Outsider Takes the Gold Cup — Then the Beachfront Oysters Take Their Revenge</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>In what racing commentators are already calling the upset of the decade, Geoffroi Deschandeliers of Neo-France crossed the finish line at the Night City Derby today aboard <em>Bottle of Smoke</em> — the only horse in the field running without Biotechnica corporate sponsorship — to claim the Gold Cup by a length and a half over the heavily favored Biotechnica-backed <em>Helix Prime</em>.</p>
+                    <p>The crowd at Pacifica Downs went silent as Bottle of Smoke cleared the final straight, then erupted. Six Biotechnica-sponsored mounts, each outfitted with the company's proprietary BioStride performance augmentation program, were left trailing. Biotechnica's racing division has not yet issued a statement, though several track-side reps were observed leaving early.</p>
+                    <p>Geoffroi Deschandeliers, 29, wept openly on the saddle before the trophy presentation, crediting his trainer and what he described as "a horse that simply wanted it more." He dedicated the win to his home circuit in Lyon. The Gold Cup — a two-kilogram solid chrome trophy shaped in the likeness of a Night City skyline — was presented by Derby Chairwoman Lena Cho under heavy media flash.</p>
+                    <p>The celebration was cut short, however, when Geoffroi was seen doubled over behind the podium approximately twenty minutes after the ceremony. Witnesses confirm the rider had spent the morning hours sampling raw oysters from a vendor operating on the Night City beachfront, a stretch of coastline that environmental monitors have flagged no fewer than four times this year for elevated chemical runoff from the Petrochem refinery corridor.</p>
+                    <p>The Night City Lifeguard Association (NCLA) confirmed late this afternoon that warning signs have been posted along the affected beachfront stretch and that a small number of squatters occupying the dunes near the vendor stalls have been relocated pending a coastal safety assessment. "We strongly advise against consuming any raw or unprocessed seafood sourced from Night City coastal waters," said NCLA spokesman Dario Muñoz in a brief release. "This should not require a champion jockey to illustrate."</p>
+                    <p>Geoffroi was treated on-site by medical staff and is reported to be recovering. He is expected to make the flight back to Neo-France with the Gold Cup tomorrow morning. <br> - Naomi Wu, 6/26/2045</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="textModal5" tabindex="-1" role="dialog" aria-labelledby="modal5Label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal5Label">NetWatch Issues Level-3 Blackwall Warning After Massive Data Spike Detected Over Watson:</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>NetWatch has elevated its subnet alert status to Level-3 following an anomalous data spike originating from the Watson district late Wednesday evening. Analysts describe the signal pattern as consistent with Rogue AI activity probing the Blackwall perimeter — the hardened firewall separating the public Net from the digital wasteland left behind by the DataKrash of '09.</p>
+                    <p>NetWatch field teams were deployed to Watson within the hour, locking down several public terminals and severing two local access nodes as a precautionary measure. Residents in the area reported brief but total loss of braindance feeds and AR overlays during the blackout window.</p>
+                    <p>"We neutralized the intrusion vector before any breach occurred," said NetWatch spokesperson Hana Yee in a brief statement. "The public Net remains secure." Critics were quick to point out that NetWatch has issued similar assurances twice in the past year, both times preceding confirmed Rogue AI incursions elsewhere in the city.</p>
+                    <p>NCPD has declined to comment. Watson locals are advised to report any unusual cyberware behavior or unexplained neural feedback to the nearest precinct. <br> - Naomi Wu, 6/25/2045</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="textModal6" tabindex="-1" role="dialog" aria-labelledby="modal6Label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal6Label">Militech Arms Cache Raided in Pacifica — Corporate Security Suspects Inside Job:</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>A Militech logistics depot operating under civilian cover in the Pacifica district was stripped of an estimated 4.2 million eurodollars in military-grade hardware early Tuesday morning. Sources close to the investigation describe the missing inventory as including Smart-linked assault platforms, encrypted comm arrays, and at least one crate of experimental non-lethal deterrent systems currently under NUSA evaluation contract.</p>
+                    <p>What makes the breach remarkable is what was left behind. Security footage — what little wasn't wiped — shows the raid conducted in under eleven minutes, with no forced entry at the primary access points. Internal badge logs place three Militech contractors at the facility during the theft window, all of whom have since gone dark.</p>
+                    <p>"Militech takes the security of its assets extremely seriously and is cooperating fully with an internal investigation," read a terse corporate statement released Thursday. No mention of NCPD involvement was made.</p>
+                    <p>Street-level chatter in Pacifica suggests the hardware has already begun moving through fixer networks. Militech has quietly put a bounty on the contractors. No figure has been confirmed. <br> - Duke Raoul, 6/22/2045</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+
     <script>
-        // Optional: Add this script to close the modal when clicking anywhere outside it
         $(document).on('click', '.modal', function (e) {
             if ($(e.target).hasClass('modal')) {
                 $(this).modal('hide');
             }
         });
-    </script>
-    
 
-    </body>
-    </html>
+        // Staggered card entrance
+        anime({
+            targets: '.row .col-md-4, .row .col-12',
+            opacity: [0, 1],
+            translateY: [28, 0],
+            delay: anime.stagger(80),
+            duration: 500,
+            easing: 'easeOutQuad'
+        });
+    </script>
+</body>
+
+</html>

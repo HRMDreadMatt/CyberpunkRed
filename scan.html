@@ -2,18 +2,72 @@
 <html>
 
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Night City Public Terminal</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .scan-line {
+            min-height: 1.5em;
+            line-height: 1.5;
+            color: var(--text);
+        }
+
+        .scan-line.accent {
+            color: var(--accent);
+            text-shadow: 0 0 8px rgba(0, 255, 65, 0.6);
+        }
+
+        .scan-line.warn {
+            color: var(--warn);
+        }
+
+        .scan-line.error {
+            color: var(--dead);
+            text-shadow: 0 0 6px rgba(255, 51, 51, 0.7);
+        }
+
+        .scan-value {
+            color: var(--accent);
+        }
+
+        .scan-warn {
+            color: var(--warn);
+        }
+
+        .scan-error {
+            color: var(--dead);
+        }
+
+        /* Blinking cursor on active line */
+        .scan-line.typing::after {
+            content: '█';
+            color: var(--accent);
+            animation: scan-blink 0.6s step-end infinite;
+        }
+
+        @keyframes scan-blink {
+            50% { opacity: 0; }
+        }
+
+        #scan-output {
+            width: min(90vw, 720px);
+            margin: 2rem auto;
+            padding: 1.5rem 2rem;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.92rem;
+            border: 1px solid var(--border);
+            background: rgba(0, 255, 65, 0.02);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.05);
+            text-align: left;
+        }
+    </style>
 </head>
 
 <body>
     <nav style="display: flex; align-items: center; padding: 10px; background-color: #333; color: white;">
-        <!-- Left-aligned link -->
         <a href="index.html" style="text-decoration: none; color: white; font-weight: bold; margin-right: 20px;">Terminal</a>
-        
-        <!-- Centered navigation links -->
+
         <ul style="display: flex; list-style: none; margin: 0 auto; padding: 0; flex-grow: 1; justify-content: center;">
-            <!-- <li style="margin: 0 10px;"><a href="index.html" style="text-decoration: none; color: white;">Terminal</a></li> -->
             <li style="margin: 0 10px;"><a href="privacy.html" style="text-decoration: none; color: white;">Privacy</a></li>
             <li style="margin: 0 10px;"><a href="news.html" style="text-decoration: none; color: white;">News</a></li>
             <li style="margin: 0 10px;"><a href="map.html" style="text-decoration: none; color: white;">Map</a></li>
@@ -22,82 +76,138 @@
             <li style="margin: 0 10px;"><a href="scan.html" style="text-decoration: none; color: white;">Scan</a></li>
         </ul>
     </nav>
-    <div>
-        <div class="metric-container" id="loadTimeMetric">
-            <h2>Scan Time</h2>
-            <p id="loadTime" class="typing-effect"></p>
-        </div>
 
-        <div class="metric-container" id="browserInfoMetric">
-            <h2>Agent Information</h2>
-            <p id="browserInfo" class="typing-effect"></p>
-        </div>
+    <div id="scan-output">
+        <div id="scan-lines"></div>
+    </div>
 
-        <div class="metric-container" id="deviceMemoryMetric">
-            <h2>Device Memory</h2>
-            <p id="deviceMemory" class="typing-effect"></p>
-        </div>
+    <script>
+        (async function () {
+            const PAD_TO = 46;
 
-        <div class="metric-container" id="languageMemoryMetric">
-            <h2>Language</h2>
-            <p id="languageMemory" class="typing-effect"></p>
-        </div>
+            function pad(label) {
+                const dots = PAD_TO - label.length;
+                return label + '.'.repeat(Math.max(dots, 1)) + ' ';
+            }
 
-        <div class="metric-container" id="locationMemoryMetric">
-            <h2>Location</h2>
-            <p id="locationMemory" class="typing-effect"></p>
-        </div>
+            // ── Gather all metrics before displaying ────────────────
+            const now = new Date();
+            const datePart = now.getFullYear() + '.' +
+                String(now.getMonth() + 1).padStart(2, '0') + '.' +
+                String(now.getDate()).padStart(2, '0');
+            const timePart = String(now.getHours()).padStart(2, '0') + ':' +
+                String(now.getMinutes()).padStart(2, '0') + ':' +
+                String(now.getSeconds()).padStart(2, '0');
 
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                // Scan Time
-                var loadEventEnd = Date.now();
+            const cores        = navigator.hardwareConcurrency ? navigator.hardwareConcurrency + ' CORES' : 'UNKNOWN';
+            const mem          = navigator.deviceMemory ? navigator.deviceMemory + ' GB' : 'CLASSIFIED';
+            const screenRes    = screen.width + ' x ' + screen.height + ' px';
+            const pixelRatio   = window.devicePixelRatio ? window.devicePixelRatio + 'x' : '1x';
+            const colorDepth   = screen.colorDepth ? screen.colorDepth + '-BIT' : 'UNKNOWN';
+            const viewport     = window.innerWidth + ' x ' + window.innerHeight + ' px';
 
-                // other metrics
-                var browserInfo = "Agent Version: " + navigator.userAgent;
+            let timezone = 'UNKNOWN';
+            try { timezone = Intl.DateTimeFormat().resolvedOptions().timeZone; } catch(e) {}
+            const language     = navigator.language || 'UNKNOWN';
+            const online       = navigator.onLine;
+            const subnetStatus = online ? 'CONNECTED' : 'OFFLINE';
 
-                var deviceMemory = "Device Memory: " + (navigator.deviceMemory || "N/A");
+            let uplinkType  = 'UNKNOWN';
+            let uplinkSpeed = 'UNKNOWN';
+            let netLatency  = 'UNKNOWN';
+            const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+            if (conn) {
+                uplinkType  = conn.effectiveType ? conn.effectiveType.toUpperCase() : 'UNKNOWN';
+                uplinkSpeed = conn.downlink       ? conn.downlink + ' MBPS'         : 'UNKNOWN';
+                netLatency  = conn.rtt !== undefined ? conn.rtt + ' MS'             : 'UNKNOWN';
+            }
 
-                var language = navigator.language;
+            const haptic      = (navigator.maxTouchPoints > 0) ? navigator.maxTouchPoints + ' NODE(S)' : 'NONE';
+            const ghostProto  = navigator.doNotTrack === '1' ? 'ACTIVE' : 'INACTIVE';
 
-                var location = "Night City";
+            let batteryLine   = null;
+            try {
+                const bat = await navigator.getBattery();
+                const pct = Math.round(bat.level * 100);
+                const chg = bat.charging ? ' // CHARGING' : '';
+                batteryLine = pct + '%' + chg;
+            } catch(e) { /* API not available */ }
 
-                // Metrics array - must match HTML
-                var metrics = [
-                    "Scan time: " + loadEventEnd + " milliseconds",
-                    browserInfo,
-                    deviceMemory,
-                    "Language: " + language,
-                    "Location: " + location,
-                ];
+            const agentStr = navigator.userAgent;
 
-                // Display metrics one at a time with a delay
-                var index = 0;
-                function displayNextMetric() {
-                    if (index < metrics.length) {
-                        var currentMetric = metrics[index];
-                        var currentElement = document.querySelectorAll(".typing-effect")[index];
-                        simulateTyping(currentElement, currentMetric);
-                        index++;
+            // ── Build display sequence ───────────────────────────────
+            // Each entry: { text, cls, suffix, suffixCls, pause, speed }
+            const lines = [
+                { text: '>> INITIATING AGENT SCAN...',                              cls: 'accent', pause: 400, speed: 35 },
+                { text: '' },
+                { text: pad('[SCAN] TIMESTAMP'),           suffix: datePart + ' // ' + timePart, suffixCls: 'scan-value', pause: 60 },
+                { text: pad('[SCAN] NEURAL PROCESSORS'),   suffix: cores,        suffixCls: 'scan-value', pause: 60 },
+                { text: pad('[SCAN] MEMORY ALLOCATION'),   suffix: mem,          suffixCls: 'scan-value', pause: 60 },
+                { text: pad('[SCAN] OPTICAL RESOLUTION'),  suffix: screenRes,    suffixCls: 'scan-value', pause: 60 },
+                { text: pad('[SCAN] DISPLAY DENSITY'),     suffix: pixelRatio,   suffixCls: 'scan-value', pause: 60 },
+                { text: pad('[SCAN] CHROMATIC DEPTH'),     suffix: colorDepth,   suffixCls: 'scan-value', pause: 60 },
+                { text: pad('[SCAN] VIEWPORT MATRIX'),     suffix: viewport,     suffixCls: 'scan-value', pause: 160 },
+                { text: '' },
+                { text: pad('[SCAN] GEOSYNC TIMEZONE'),    suffix: timezone,     suffixCls: 'scan-value', pause: 60 },
+                { text: pad('[SCAN] LANGUAGE CODEC'),      suffix: language,     suffixCls: 'scan-value', pause: 60 },
+                { text: pad('[SCAN] SUBNET STATUS'),       suffix: subnetStatus, suffixCls: online ? 'scan-value' : 'scan-warn', pause: 60 },
+                { text: pad('[SCAN] UPLINK TYPE'),         suffix: uplinkType,   suffixCls: 'scan-value', pause: 60 },
+                { text: pad('[SCAN] UPLINK SPEED'),        suffix: uplinkSpeed,  suffixCls: 'scan-value', pause: 60 },
+                { text: pad('[SCAN] NETWORK LATENCY'),     suffix: netLatency,   suffixCls: 'scan-value', pause: 160 },
+                { text: '' },
+                { text: pad('[SCAN] HAPTIC NODES'),        suffix: haptic,       suffixCls: 'scan-value', pause: 60 },
+                { text: pad('[SCAN] GHOST PROTOCOL'),      suffix: ghostProto,   suffixCls: ghostProto === 'ACTIVE' ? 'scan-value' : 'scan-warn', pause: 60 },
+                ...(batteryLine ? [
+                    { text: pad('[SCAN] POWER CELL'),      suffix: batteryLine,  suffixCls: 'scan-value', pause: 60 }
+                ] : []),
+                { text: '' },
+                { text: pad('[SCAN] AGENT VERSION'),       suffix: agentStr,     suffixCls: 'scan-value', pause: 200, speed: 8 },
+                { text: '' },
+                { text: '>> SCAN COMPLETE. DATA LOGGED TO NIGHT CITY SUBNET.',     cls: 'accent', pause: 0, speed: 35 },
+            ];
+
+            // ── Render ───────────────────────────────────────────────
+            const container = document.getElementById('scan-lines');
+            const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+            for (const line of lines) {
+                const div = document.createElement('div');
+                div.className = 'scan-line' + (line.cls ? ' ' + line.cls : '');
+                container.appendChild(div);
+
+                if (line.text) {
+                    div.classList.add('typing');
+                    const speed = line.speed !== undefined ? line.speed : 18;
+
+                    if (line.suffix !== undefined) {
+                        const prefixSpan = document.createElement('span');
+                        div.appendChild(prefixSpan);
+                        for (const char of line.text) {
+                            prefixSpan.textContent += char;
+                            await sleep(speed);
+                        }
+                        const suffixSpan = document.createElement('span');
+                        suffixSpan.className = line.suffixCls || '';
+                        div.appendChild(suffixSpan);
+                        for (const char of line.suffix) {
+                            suffixSpan.textContent += char;
+                            await sleep(speed);
+                        }
+                    } else {
+                        for (const char of line.text) {
+                            div.textContent += char;
+                            await sleep(speed);
+                        }
                     }
+
+                    div.classList.remove('typing');
                 }
 
-                // Call the function with a delay between each metric
-                setInterval(displayNextMetric, 500); // Adjust the delay (milliseconds)
-            });
-
-            function simulateTyping(element, text) {
-                var index = 0;
-                var typingInterval = setInterval(function () {
-                    element.innerHTML += text.charAt(index);
-                    index++;
-                    if (index > text.length) {
-                        clearInterval(typingInterval);
-                    }
-                }, 30); // Adjust the typing speed (milliseconds)
+                await sleep(line.pause || 60);
             }
-        </script>
-    </div>
+        })();
+    </script>
+
     <script src="script.js"></script>
 </body>
 
