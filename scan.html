@@ -38,6 +38,17 @@
             color: var(--dead);
         }
 
+        .scan-reliable {
+            color: #00e5ff;
+            text-shadow: 0 0 6px rgba(0, 229, 255, 0.6);
+        }
+
+        .scan-ns {
+            color: #a78bfa;
+            font-size: 0.8rem;
+            opacity: 0.75;
+        }
+
         /* Blinking cursor on active line */
         .scan-line.typing::after {
             content: '█';
@@ -72,6 +83,7 @@
             <li style="margin: 0 10px;"><a href="news.html" style="text-decoration: none; color: white;">News</a></li>
             <li style="margin: 0 10px;"><a href="map.html" style="text-decoration: none; color: white;">Map</a></li>
             <li style="margin: 0 10px;"><a href="npc.html" style="text-decoration: none; color: white;">Dossier</a></li>
+            <li style="margin: 0 10px;"><a href="factions.html" style="text-decoration: none; color: white;">Factions</a></li>
             <li style="margin: 0 10px;"><a href="locations.html" style="text-decoration: none; color: white;">Locations</a></li>
             <li style="margin: 0 10px;"><a href="scan.html" style="text-decoration: none; color: white;">Scan</a></li>
         </ul>
@@ -92,7 +104,7 @@
 
             // ── Gather all metrics before displaying ────────────────
             const now = new Date();
-            const datePart = now.getFullYear() + '.' +
+            const datePart = '2045' + '.' +
                 String(now.getMonth() + 1).padStart(2, '0') + '.' +
                 String(now.getDate()).padStart(2, '0');
             const timePart = String(now.getHours()).padStart(2, '0') + ':' +
@@ -135,6 +147,15 @@
 
             const agentStr = navigator.userAgent;
 
+            // ── Threat assessment ────────────────────────────────────
+            const threats = [
+                { label: 'TRUSTED',  cls: 'scan-value'    },
+                { label: 'RELIABLE', cls: 'scan-reliable'  },
+                { label: 'NEUTRAL',  cls: 'scan-warn'      },
+                { label: 'HOSTILE',  cls: 'scan-error'     },
+            ];
+            const threat = threats[Math.floor(Math.random() * threats.length)];
+
             // ── Build display sequence ───────────────────────────────
             // Each entry: { text, cls, suffix, suffixCls, pause, speed }
             const lines = [
@@ -148,7 +169,8 @@
                 { text: pad('[SCAN] CHROMATIC DEPTH'),     suffix: colorDepth,   suffixCls: 'scan-value', pause: 60 },
                 { text: pad('[SCAN] VIEWPORT MATRIX'),     suffix: viewport,     suffixCls: 'scan-value', pause: 160 },
                 { text: '' },
-                { text: pad('[SCAN] GEOSYNC TIMEZONE'),    suffix: timezone,     suffixCls: 'scan-value', pause: 60 },
+                { text: pad('[SCAN] GEOSYNC TIMEZONE'),    suffix: 'AMERICA/LOS_ANGELES',  suffixCls: 'scan-value', pause: 60 },
+                { text: pad('[SCAN] CURRENT LOCATION'),   suffix: 'NIGHT CITY, NCSA',     suffixCls: 'scan-value', pause: 60 },
                 { text: pad('[SCAN] LANGUAGE CODEC'),      suffix: language,     suffixCls: 'scan-value', pause: 60 },
                 { text: pad('[SCAN] SUBNET STATUS'),       suffix: subnetStatus, suffixCls: online ? 'scan-value' : 'scan-warn', pause: 60 },
                 { text: pad('[SCAN] UPLINK TYPE'),         suffix: uplinkType,   suffixCls: 'scan-value', pause: 60 },
@@ -163,7 +185,11 @@
                 { text: '' },
                 { text: pad('[SCAN] AGENT VERSION'),       suffix: agentStr,     suffixCls: 'scan-value', pause: 200, speed: 8 },
                 { text: '' },
-                { text: '>> SCAN COMPLETE. DATA LOGGED TO NIGHT CITY SUBNET.',     cls: 'accent', pause: 0, speed: 35 },
+                { text: '>> RUNNING THREAT ASSESSMENT...',                          cls: 'accent', pause: 900, speed: 35 },
+                { text: pad('[SCAN] THREAT CLASSIFICATION'),  suffix: threat.label, suffixCls: threat.cls, pause: 200, speed: 35 },
+                { text: '' },
+                { text: '>> SCAN COMPLETE. DATA LOGGED TO NIGHT CITY SUBNET.',                                      cls: 'accent', pause: 0,  speed: 35 },
+                { text: '// the above data was reviewed and lightly curated by an interested party. — NS', cls: 'scan-ns', pause: 0,  speed: 28 },
             ];
 
             // ── Render ───────────────────────────────────────────────

@@ -7,22 +7,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* CRT scanlines — privacy page only */
-        body::after {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background: repeating-linear-gradient(
-                0deg,
-                transparent,
-                transparent 2px,
-                rgba(0, 0, 0, 0.18) 2px,
-                rgba(0, 0, 0, 0.18) 4px
-            );
-            pointer-events: none;
-            z-index: 9998;
-        }
-
         /* Styles for the custom toast container */
         .custom-toast-container {
             display: none;
@@ -50,6 +34,7 @@
             <li style="margin: 0 10px;"><a href="news.html" style="text-decoration: none; color: white;">News</a></li>
             <li style="margin: 0 10px;"><a href="map.html" style="text-decoration: none; color: white;">Map</a></li>
             <li style="margin: 0 10px;"><a href="npc.html" style="text-decoration: none; color: white;">Dossier</a></li>
+            <li style="margin: 0 10px;"><a href="factions.html" style="text-decoration: none; color: white;">Factions</a></li>
             <li style="margin: 0 10px;"><a href="locations.html" style="text-decoration: none; color: white;">Locations</a></li>
             <li style="margin: 0 10px;"><a href="scan.html" style="text-decoration: none; color: white;">Scan</a></li>
         </ul>
@@ -59,9 +44,37 @@
             <img src="images/netwatchBanner.png" alt="Netwatch" />
         </div>
     </div>
-    <p>This terminal is protected by NetWatch under the Unilateral Agreement put forth by the World Communications Network. </p>
-    <p>NetWatch complies with all local laws of the City-State of Night City. Any malicious actor will be prosecuted by the NCPD to the full extent of the law. </p>
-    <p>NetWatch was founded in London in 1991 as a response to the ever-growing threat of cybercrime and cyberware.</p>
+    <div style="max-width: 720px; margin: 0 auto 2rem; text-align: left; line-height: 1.8;">
+        <p style="font-size: 0.88rem; color: var(--text);">
+            This terminal is protected by NetWatch under the Unilateral Subnet Protection Agreement, ratified by all signatory
+            corporate states and put forth by the World Communications Network in 2039. NetWatch was established in London in
+            1991 as a direct response to the accelerating threat of cybercrime, rogue artificial intelligence, and the
+            unchecked proliferation of military-grade cyberware on civilian networks. In the decades since, it has grown into
+            the world's most sophisticated digital law enforcement apparatus — a tireless, ever-present force standing between
+            the stability of the global subnet and the chaos that lies beyond the Blackwall.
+        </p>
+        <p style="font-size: 0.88rem; color: var(--text);">
+            Every packet transmitted through this terminal is scanned, logged, and cross-referenced against NetWatch's Unified
+            Threat Matrix in real time. Hostile ICE signatures, rogue AI behavioral patterns, Blackwall incursion vectors, and
+            unauthorized intrusion attempts are identified and neutralized within milliseconds of detection. NetWatch field
+            operatives and automated countermeasure systems maintain a continuous, unblinking presence across all Night City
+            subnet nodes — monitoring traffic, quarantining anomalies, and ensuring that the infrastructure you depend on
+            remains clean, functional, and beyond the reach of those who would corrupt it. We do not sleep. We do not relent.
+            The subnet is safe because we make it so.
+        </p>
+        <p style="font-size: 0.88rem; color: var(--text);">
+            NetWatch operates in full compliance with all applicable laws of the City-State of Night City and the Night City
+            Municipal Authority. Any individual found engaging in malicious activity on this terminal — including but not
+            limited to unauthorized data extraction, personal ICE deployment, net intrusion, rogue AI trafficking, or
+            Blackwall tampering — will be flagged, tracked, and referred to the NCPD and MaxTac for prosecution to the
+            fullest extent of the law. Corporate entities found in violation of the Unilateral Agreement face immediate
+            asset seizure, subnet revocation, and referral to the Night City Corporate Tribunal.
+        </p>
+        <p style="font-size: 0.82rem; color: var(--accent); opacity: 0.7; letter-spacing: 1px;">
+            Your safety is our mission. Your subnet is our domain.
+            <br>— NetWatch Global Operations Division, Night City Sector Command
+        </p>
+    </div>
     
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" crossorigin="anonymous"></script>
@@ -69,42 +82,97 @@
     
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            // Execute the showAlertToast function after 5 seconds
             setTimeout(showAlertToast, 2000);
         });
-    
+
+        function generateAgentID() {
+            const hex = (n) => Array.from({length: n}, () =>
+                Math.floor(Math.random() * 16).toString(16).toUpperCase()
+            ).join('');
+            return `${hex(8)}-${hex(4)}-${hex(4)}-${hex(4)}-${hex(12)}`;
+        }
+
+        function typeIntoElement(el, text, speed, callback) {
+            let i = 0;
+            const interval = setInterval(() => {
+                el.textContent += text[i];
+                i++;
+                if (i >= text.length) {
+                    clearInterval(interval);
+                    if (callback) callback();
+                }
+            }, speed);
+        }
+
+        function showNightshadeToast() {
+            var nsToast = document.createElement('div');
+            nsToast.className = 'toast';
+            nsToast.setAttribute('role', 'alert');
+            nsToast.setAttribute('aria-live', 'assertive');
+            nsToast.setAttribute('aria-atomic', 'true');
+            nsToast.style.cssText = [
+                'display: none',
+                'position: fixed',
+                'bottom: 100px',
+                'left: 20px',
+                'padding: 20px 30px',
+                'background: linear-gradient(#2d1b69, #1a0d40)',
+                'border: 1px solid #6b21a8',
+                'border-radius: 15px',
+                'color: #c4b5fd',
+                'z-index: 1001',
+                'max-width: 380px',
+                'font-family: Share Tech Mono, monospace',
+                'font-size: 0.85rem',
+            ].join(';');
+
+            var nsBody = document.createElement('div');
+            nsBody.className = 'toast-body';
+            nsBody.style.color = '#c4b5fd';
+            nsToast.appendChild(nsBody);
+
+            nsToast.addEventListener('click', function () {
+                $(nsToast).toast('hide');
+            });
+
+            document.body.appendChild(nsToast);
+            $(nsToast).toast({ animation: true, autohide: false });
+            $(nsToast).toast('show');
+
+            typeIntoElement(nsBody, "netwatch detected my ICE? adorable. let's just take care of that... // NS", 35, null);
+        }
+
         function showAlertToast() {
-            // Create the custom toast container
             var toastContainer = document.createElement('div');
             toastContainer.className = 'toast custom-toast-container';
             toastContainer.setAttribute('role', 'alert');
             toastContainer.setAttribute('aria-live', 'assertive');
             toastContainer.setAttribute('aria-atomic', 'true');
-    
-            // Create the toast content
-            var toastContent = document.createElement('div');
-            toastContent.className = 'toast-body';
-            toastContent.textContent = 'NetWatch scans have detected an illegal personal ICE. Your Agent ID has been recorded and will be monitored.';
-    
-            // Dismiss the toast on click
+
+            var toastBody = document.createElement('div');
+            toastBody.className = 'toast-body';
+            toastContainer.appendChild(toastBody);
+
             toastContainer.addEventListener('click', function () {
                 $(toastContainer).toast('hide');
+                showNightshadeToast();
             });
-    
-            // Append the content to the container
-            toastContainer.appendChild(toastContent);
-    
-            // Append the toast container to the body
+
             document.body.appendChild(toastContainer);
-    
-            // Initialize Bootstrap toast
-            $(toastContainer).toast({
-                animation: true,
-                autohide: false // Set to true if you want the toast to autohide after a few seconds
-            });
-    
-            // Show the toast
+            $(toastContainer).toast({ animation: true, autohide: false });
             $(toastContainer).toast('show');
+
+            const line1 = document.createElement('span');
+            toastBody.appendChild(line1);
+
+            typeIntoElement(line1, 'NetWatch scans have detected an illegal personal ICE. Your Agent ID has been recorded and will be monitored.', 28, function () {
+                setTimeout(function () {
+                    toastBody.appendChild(document.createElement('br'));
+                    const line2 = document.createElement('span');
+                    toastBody.appendChild(line2);
+                    typeIntoElement(line2, '>> AGENT ID: ' + generateAgentID(), 45, null);
+                }, 800);
+            });
         }
     </script>
     

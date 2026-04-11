@@ -31,6 +31,133 @@
             display: block;
         }
 
+        /* ── News ticker ──────────────────────────── */
+        #ticker-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 44px;
+            background: var(--nav-bg, #060f06);
+            border-top: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            z-index: 200;
+            overflow: hidden;
+            font-size: 0.76rem;
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        #ticker-badge {
+            flex-shrink: 0;
+            padding: 0 14px;
+            color: var(--accent);
+            border-right: 1px solid var(--border);
+            white-space: nowrap;
+            letter-spacing: 1px;
+            line-height: 44px;
+        }
+
+        #ticker-dot {
+            animation: ticker-blink 1.2s step-end infinite;
+        }
+
+        @keyframes ticker-blink {
+            50% { opacity: 0; }
+        }
+
+        #ticker-wrap {
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        #ticker-track {
+            display: inline-block;
+            white-space: nowrap;
+            animation: ticker-scroll 110s linear infinite;
+            will-change: transform;
+        }
+
+        #ticker-track:hover {
+            animation-play-state: paused;
+            cursor: default;
+        }
+
+        @keyframes ticker-scroll {
+            0%   { transform: translateX(100vw); }
+            100% { transform: translateX(-100%); }
+        }
+
+        .t-corp    { color: #00e5ff; }
+        .t-crime   { color: var(--dead); }
+        .t-weather { color: var(--warn); }
+        .t-gen     { color: var(--text); }
+        .t-sep     { color: rgba(0, 255, 65, 0.35); padding: 0 14px; }
+
+        /* ── Carousel controls ────────────────────── */
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 255, 65, 0.06);
+            border: 1px solid rgba(0, 255, 65, 0.25);
+            color: var(--accent);
+            font-size: 1.4rem;
+            line-height: 1;
+            width: 32px;
+            height: 48px;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        .carousel-btn:hover {
+            background: rgba(0, 255, 65, 0.18);
+            border-color: var(--accent);
+        }
+
+        .carousel-btn.prev { left: 0; }
+        .carousel-btn.next { right: 0; }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .carousel-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            border: 1px solid rgba(0, 255, 65, 0.4);
+            background: transparent;
+            cursor: pointer;
+            padding: 0;
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+
+        .carousel-dot.active {
+            background: var(--accent);
+            box-shadow: 0 0 6px rgba(0, 255, 65, 0.7);
+        }
+
+        .carousel-label {
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            color: rgba(0, 255, 65, 0.28);
+            margin: 20px auto 4px;
+            width: 80%;
+            text-align: left;
+        }
+
         /* ── Boot overlay ─────────────────────────── */
         #boot-overlay {
             position: fixed;
@@ -69,6 +196,10 @@
         .boot-error {
             color: var(--dead, #ff3333);
             text-shadow: 0 0 6px rgba(255, 51, 51, 0.7);
+        }
+
+        .boot-ns {
+            color: #a78bfa;
         }
 
         .boot-line.final {
@@ -115,67 +246,126 @@
             <li style="margin: 0 10px;"><a href="news.html" style="text-decoration: none; color: white;">News</a></li>
             <li style="margin: 0 10px;"><a href="map.html" style="text-decoration: none; color: white;">Map</a></li>
             <li style="margin: 0 10px;"><a href="npc.html" style="text-decoration: none; color: white;">Dossier</a></li>
+            <li style="margin: 0 10px;"><a href="factions.html" style="text-decoration: none; color: white;">Factions</a></li>
             <li style="margin: 0 10px;"><a href="locations.html" style="text-decoration: none; color: white;">Locations</a></li>
             <li style="margin: 0 10px;"><a href="scan.html" style="text-decoration: none; color: white;">Scan</a></li>
         </ul>
     </nav>
 
+    <p class="carousel-label">[ Sponsors ]</p>
     <div class="carousel">
+        <button class="carousel-btn prev" onclick="prevSlide()">&#8249;</button>
         <div class="carousel-inner" id="carouselInner">
             <div class="carousel-item">
-                <img src="images/biotechnica.png" alt="Carousel Image 1">
+                <img src="images/biotechnica.png" alt="Biotechnica">
             </div>
             <div class="carousel-item">
-                <img src="images/mixitup.png" alt="Carousel Image 2">
+                <img src="images/mixitup.png" alt="Mix It Up">
             </div>
             <div class="carousel-item">
-                <img src="images/kangtao.png" alt="Carousel Image 3">
+                <img src="images/kangtao.png" alt="Kang Tao">
             </div>
             <div class="carousel-item">
-                <img src="images/zetatech.png" alt="Carousel Image 4">
+                <img src="images/zetatech.png" alt="Zetatech">
+            </div>
+            <div class="carousel-item">
+                <img src="images/nicola.png" alt="Nicola" style="max-height: 300px; width: auto; margin: 0 auto;">
             </div>
         </div>
+        <button class="carousel-btn next" onclick="nextSlide()">&#8250;</button>
     </div>
+    <div class="carousel-dots" id="carouselDots"></div>
 
     <div style="padding-bottom: 40px; padding-top: 20px;">
         <h2>Welcome to the Night City public subnet</h2>
         <p>Made available for public use by Night Corp.</p>
-        <p>Please consider donating to the Richard Night Foundation to help keep our City of Dreams beautiful.</p>
+
+        <p style="max-width: 720px; margin: 1.5rem auto; font-size: 0.78rem; color: var(--text); opacity: 0.6; line-height: 1.8; text-align: left;">
+            By accessing this terminal you unconditionally agree to the Night City Public Access Terms of Use (NC-TOU Rev. 14.7),
+            the NetWatch Unified Data Sovereignty Agreement, and all subsidiary protocols therein. Your biometric signature,
+            neural activity patterns, browsing history, geolocation data, personal communications, financial records, and any
+            cyberware telemetry transmitted during this session may be collected, stored, analyzed, sold, licensed, or
+            redistributed to Night Corp, NetWatch, affiliated corporate entities, and any third parties deemed relevant by
+            Night Corp's Data Monetization Division — without prior notice, compensation, or right of refusal. Session data
+            is retained indefinitely under Night City Municipal Code §12.4 (Corporate Data Rights). Unauthorized access,
+            data obfuscation, use of personal ICE, or any attempt to mask your Agent ID on this terminal constitutes a
+            violation of NC Municipal Code §7.4 and may result in immediate neural disconnection, NCPD citation, or direct
+            referral to NetWatch enforcement teams. Night Corp assumes no liability for psychological distress, cognitive
+            drift, cyberpsychosis, identity fragmentation, or data-related injury sustained during or after use of this
+            terminal. By continuing to use this subnet you waive all rights to privacy as defined under pre-Collapse federal
+            law and acknowledge that in Night City, information is currency — and yours now belongs to us.
+        </p>
+
+        <p style="font-size: 0.82rem; opacity: 0.5;">Please consider donating to the Richard Night Foundation to help keep our City of Dreams beautiful.</p>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            <marquee behavior="scroll" direction="left" style="color:red">|| Ziggurat Group Announces Space Elevator
-                Project: The mega-corporation plans to build a space elevator,
-                promising a new era of space travel and resource exploitation. || Night City Fashion Week: Renowned designer
-                Mako Takahashi unveils a collection blending futuristic techwear with traditional Japanese aesthetics. ||
-                Trauma Team Faces Lawsuits: Families of clients demand accountability as Trauma Team International faces
-                accusations of negligence during high-risk extractions. || Corporate Sabotage at Petrochem Facility:
-                Petrochem accuses rival corporations of sabotage after a refinery explosion causes a major oil spill in the
-                Pacific Ocean || NCPD Crackdown on Ripperdoc Clinics: Night City Police Department initiates a city-wide
-                operation targeting unlicensed ripperdoc clinics, claiming they contribute to the rise in cyberpsychosis. ||
-                New Drug Hits the Streets: "Verve" promises heightened awareness and reflexes, but authorities warn of
-                dangerous side effects and addiction. || Weather Report: "Acid rain advisory in effect for Night City's
-                western districts. Expect poor visibility and increased cybernetic corrosion.
-            </marquee>
+    <div id="ticker-bar">
+        <div id="ticker-badge">
+            <span id="ticker-dot">◈</span>&nbsp;N54 LIVE&nbsp;&nbsp;|&nbsp;&nbsp;<span id="ticker-clock"></span>
         </div>
-    </footer>
+        <div id="ticker-wrap">
+            <div id="ticker-track">
+                <span class="t-corp">Ziggurat Group Announces Space Elevator Project: The mega-corporation plans to build a space elevator, promising a new era of space travel and resource exploitation.</span>
+                <span class="t-sep">◈</span>
+                <span class="t-gen">Night City Fashion Week: Renowned designer Mako Takahashi unveils a collection blending futuristic techwear with traditional Japanese aesthetics.</span>
+                <span class="t-sep">◈</span>
+                <span class="t-crime">Trauma Team Faces Lawsuits: Families of clients demand accountability as Trauma Team International faces accusations of negligence during high-risk extractions.</span>
+                <span class="t-sep">◈</span>
+                <span class="t-corp">Corporate Sabotage at Petrochem Facility: Petrochem accuses rival corporations of sabotage after a refinery explosion causes a major oil spill in the Pacific Ocean.</span>
+                <span class="t-sep">◈</span>
+                <span class="t-crime">NCPD Crackdown on Ripperdoc Clinics: Night City Police Department initiates a city-wide operation targeting unlicensed ripperdoc clinics, claiming they contribute to the rise in cyberpsychosis.</span>
+                <span class="t-sep">◈</span>
+                <span class="t-crime">New Drug Hits the Streets: "Verve" promises heightened awareness and reflexes, but authorities warn of dangerous side effects and addiction.</span>
+                <span class="t-sep">◈</span>
+                <span class="t-weather">Weather Report: Acid rain advisory in effect for Night City's western districts. Expect poor visibility and increased cybernetic corrosion.</span>
+                <span class="t-sep">◈</span>
+                <span class="t-crime">Chaos at The Glen: Shouting, gunfire, and a riot — violence in the alleyways at the South Night City border prompts NCPD investigation. 3 dead, 7 injured.</span>
+                <span class="t-sep">◈</span>
+                <span class="t-corp">Arasaka Unveils New Neural Implant Offering "Ultimate Empathy" — Critics cry Big Brother as ethical concerns mount.</span>
+                <span class="t-sep">◈</span>
+                <span class="t-corp">Biotechnica CEO Found Alive After Missing Months, "Rewired" and Vowing Revenge.</span>
+                <span class="t-sep">◈</span>
+                <span class="t-gen">Rogue AI Takes Over Abandoned Corporate Factory, Starts Producing "Hacked" Cyberware — Scavengers Flock for Deals.</span>
+                <span class="t-sep">◈</span>
+                <span class="t-crime">NetWatch Issues Level-3 Blackwall Warning After Massive Data Spike Detected Over Watson. Response teams scrambled.</span>
+                <span class="t-sep">◈</span>
+                <span class="t-crime">Militech Arms Cache Raided in Pacifica — Corporate Security Suspects Inside Job. Millions in military-grade hardware unaccounted for.</span>
+                <span class="t-sep">◈</span>
+                <span class="t-gen">Night City Derby — Geoffroi Deschandeliers of Neo-France Claims Gold Cup in Stunning Upset over six Biotechnica-backed thoroughbreds.</span>
+            </div>
+        </div>
+    </div>
 
     <script>
         // ── Carousel ────────────────────────────────────────────
         let currentSlide = 0;
         const slides = document.querySelectorAll('.carousel-item');
         const carouselInner = document.getElementById('carouselInner');
+        const dotsContainer = document.getElementById('carouselDots');
         let autoCycleInterval;
 
-        function showSlide(n) {
-            carouselInner.style.transform = `translateX(-${n * 100}%)`;
+        // Build indicator dots
+        slides.forEach((_, i) => {
+            const dot = document.createElement('button');
+            dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+            dot.addEventListener('click', () => { stopAutoCycle(); goToSlide(i); startAutoCycle(); });
+            dotsContainer.appendChild(dot);
+        });
+
+        function updateDots() {
+            document.querySelectorAll('.carousel-dot').forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentSlide);
+            });
         }
 
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % slides.length;
-            showSlide(currentSlide);
+        function goToSlide(n) {
+            currentSlide = (n + slides.length) % slides.length;
+            carouselInner.style.transform = `translateX(-${currentSlide * 100}%)`;
+            updateDots();
         }
+
+        function nextSlide() { goToSlide(currentSlide + 1); }
+        function prevSlide() { goToSlide(currentSlide - 1); }
 
         function startAutoCycle() {
             autoCycleInterval = setInterval(nextSlide, 4000);
@@ -202,7 +392,8 @@
                 { text: '[BOOT] Initializing hardware subsystems............. OK',    pause: 80 },
                 { text: '[BOOT] Loading NetWatch security layer.............. OK',    pause: 80 },
                 { text: '[BOOT] Verifying subnet integrity................... OK',    pause: 80 },
-                { text: '[BOOT] Scanning for hostile ICE..................... ', suffix: 'ICE DETECTED', suffixCls: 'boot-error', pause: 220 },
+                { text: '[BOOT] Scanning for hostile ICE..................... ', suffix: 'ICE DETECTED',            suffixCls: 'boot-error', pause: 120 },
+                { text: '[BOOT] Scanning for known viruses.................. ', suffix: 'ATROPINE_V_18.4 DETECTED', suffixCls: 'boot-ns',   pause: 300 },
                 { text: '[BOOT] Authenticating session....................... ANON',   cls: 'warn', pause: 80 },
                 { text: '[BOOT] Loading district directory................... OK',    pause: 80 },
                 { text: '[BOOT] Establishing backbone uplink................. OK',    pause: 380 },
@@ -278,6 +469,20 @@
     </script>
 
     <script src="script.js"></script>
+    <script>
+        // ── Ticker clock ─────────────────────────────────────────
+        function updateTickerClock() {
+            const now = new Date();
+            const mo = String(now.getMonth() + 1).padStart(2, '0');
+            const d  = String(now.getDate()).padStart(2, '0');
+            const h  = String(now.getHours()).padStart(2, '0');
+            const mi = String(now.getMinutes()).padStart(2, '0');
+            const s  = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('ticker-clock').textContent = `2045.${mo}.${d} ${h}:${mi}:${s}`;
+        }
+        updateTickerClock();
+        setInterval(updateTickerClock, 1000);
+    </script>
 </body>
 
 </html>

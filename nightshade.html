@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Atropine_v_18.4</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        /* ── Title ─────────────────────────────────────────────── */
+        .virus-title {
+            font-size: clamp(2rem, 6vw, 3.8rem);
+            color: #a78bfa;
+            text-shadow:
+                0 0 12px rgba(167, 139, 250, 0.9),
+                0 0 40px rgba(107, 33, 168, 0.6),
+                0 0 80px rgba(107, 33, 168, 0.3);
+            letter-spacing: 6px;
+            margin-bottom: 3.5rem;
+            animation: title-flicker 9s infinite;
+        }
+
+        @keyframes title-flicker {
+            0%, 91%, 93%, 95%, 100% { opacity: 1; }
+            92% { opacity: 0.6; }
+            94% { opacity: 0.85; }
+        }
+
+        /* ── Status label ──────────────────────────────────────── */
+        .install-status {
+            font-size: 0.95rem;
+            color: #c4b5fd;
+            letter-spacing: 4px;
+            margin-bottom: 0.75rem;
+            min-height: 1.5em;
+            transition: color 0.4s, text-shadow 0.4s;
+        }
+
+        /* ── Bar ───────────────────────────────────────────────── */
+        .bar-wrap {
+            width: 620px;
+            max-width: 90vw;
+            margin: 0 auto;
+        }
+
+        .bar-container {
+            width: 100%;
+            height: 30px;
+            background: rgba(45, 27, 105, 0.25);
+            border: 1px solid #6b21a8;
+            box-shadow:
+                0 0 18px rgba(107, 33, 168, 0.5),
+                inset 0 0 12px rgba(0, 0, 0, 0.6);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #1a0d40 0%, #6b21a8 55%, #a78bfa 100%);
+            box-shadow: 0 0 14px rgba(167, 139, 250, 0.7);
+            position: relative;
+        }
+
+        /* Segment tick marks */
+        .bar-fill::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(
+                90deg,
+                transparent,
+                transparent 11px,
+                rgba(0, 0, 0, 0.25) 11px,
+                rgba(0, 0, 0, 0.25) 12px
+            );
+        }
+
+        /* Moving shine sweep */
+        .bar-fill::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -80%;
+            width: 45%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.14), transparent);
+            animation: bar-shine 1.9s linear infinite;
+        }
+
+        @keyframes bar-shine {
+            0%   { left: -60%; }
+            100% { left: 160%; }
+        }
+
+        .bar-pct {
+            font-size: 0.78rem;
+            color: #a78bfa;
+            margin-top: 0.4rem;
+            letter-spacing: 2px;
+            text-align: right;
+            min-height: 1.2em;
+        }
+
+        /* ── Nightshade messages ───────────────────────────────── */
+        .ns-message {
+            margin-top: 2.5rem;
+            font-size: 0.88rem;
+            color: #c4b5fd;
+            min-height: 1.5em;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            letter-spacing: 1px;
+            font-style: italic;
+        }
+
+        .ns-message.visible {
+            opacity: 1;
+        }
+
+        /* ── Skull ─────────────────────────────────────────────── */
+        .ns-skull {
+            font-size: 9rem;
+            display: none;
+            margin-top: 2rem;
+            filter: drop-shadow(0 0 24px rgba(167, 139, 250, 0.95));
+            animation: skull-pulse 2.2s ease-in-out infinite;
+            line-height: 1;
+        }
+
+        @keyframes skull-pulse {
+            0%, 100% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 20px rgba(167, 139, 250, 0.8));
+            }
+            50% {
+                transform: scale(1.07);
+                filter: drop-shadow(0 0 45px rgba(167, 139, 250, 1));
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="virus-title">Atropine_v_18.4</h1>
+
+    <div class="bar-wrap">
+        <div class="install-status" id="install-status">INSTALLING...</div>
+        <div class="bar-container">
+            <div class="bar-fill" id="bar-fill"></div>
+        </div>
+        <div class="bar-pct" id="bar-pct">0%</div>
+    </div>
+
+    <div class="ns-message" id="ns-message"></div>
+    <div class="ns-skull" id="ns-skull">💀</div>
+
+    <script>
+        const barFill  = document.getElementById('bar-fill');
+        const barPct   = document.getElementById('bar-pct');
+        const statusEl = document.getElementById('install-status');
+        const msgEl    = document.getElementById('ns-message');
+        const skullEl  = document.getElementById('ns-skull');
+
+        // ── Sassy messages at progress thresholds ───────────────
+        const messages = [
+            { at: 5,  text: "oh hey. you actually typed this in. i'm touched. // NS" },
+            { at: 16, text: "relax. this is totally legal. well. legally ambiguous. // NS" },
+            { at: 29, text: "netwatch is gonna be SO mad lol // NS" },
+            { at: 43, text: "you could close the tab. you won't. but the option exists. // NS" },
+            { at: 57, text: "no seriously. why are you still here. // NS" },
+            { at: 71, text: "almost there. try not to look so suspicious. // NS" },
+            { at: 85, text: "can't stop now choom. we're committed. // NS" },
+            { at: 95, text: "aaaand just like that, you're an accomplice. // NS" },
+        ];
+
+        let progress    = 0;
+        let lastMsgIdx  = -1;
+        let typeTimer   = null;
+        let done        = false;
+
+        // ── Type a message in ────────────────────────────────────
+        function showMessage(text) {
+            if (typeTimer) clearInterval(typeTimer);
+            msgEl.textContent = '';
+            msgEl.classList.add('visible');
+            let i = 0;
+            typeTimer = setInterval(() => {
+                msgEl.textContent += text[i++];
+                if (i >= text.length) clearInterval(typeTimer);
+            }, 28);
+        }
+
+        // ── Check if a new threshold message should fire ─────────
+        function checkMessages(p) {
+            for (let i = 0; i < messages.length; i++) {
+                if (p >= messages[i].at && i > lastMsgIdx) {
+                    lastMsgIdx = i;
+                    showMessage(messages[i].text);
+                    break;
+                }
+            }
+        }
+
+        // ── Glitch the displayed percentage occasionally ─────────
+        function glitchedPct(real) {
+            if (Math.random() < 0.13) {
+                const wobble = Math.floor(Math.random() * 16) - 8;
+                return Math.min(100, Math.max(0, Math.round(real) + wobble));
+            }
+            return Math.round(real);
+        }
+
+        // ── Main tick ────────────────────────────────────────────
+        function tick() {
+            if (done) return;
+
+            const r = Math.random();
+
+            if (r < 0.07) {
+                // stutter — slip back
+                progress = Math.max(0, progress - Math.random() * 7);
+            } else if (r < 0.14) {
+                // freeze — skip this tick entirely
+            } else if (r < 0.21) {
+                // lurch — jump ahead more than usual
+                progress = Math.min(99.5, progress + Math.random() * 10);
+            } else {
+                // normal crawl
+                progress = Math.min(99.5, progress + Math.random() * 2.4);
+            }
+
+            barFill.style.width = progress + '%';
+            barPct.textContent  = glitchedPct(progress) + '%';
+            checkMessages(progress);
+
+            if (progress >= 99.5) {
+                complete();
+            } else {
+                setTimeout(tick, 75 + Math.random() * 170);
+            }
+        }
+
+        // ── Completion ───────────────────────────────────────────
+        function complete() {
+            done = true;
+            progress = 100;
+            barFill.style.width = '100%';
+            barPct.textContent  = '100%';
+
+            setTimeout(() => {
+                statusEl.textContent   = 'INSTALLED XD';
+                statusEl.style.color   = '#a78bfa';
+                statusEl.style.textShadow = '0 0 16px rgba(167, 139, 250, 0.9)';
+                showMessage("welcome to the team. XD // NS");
+                skullEl.style.display  = 'block';
+            }, 500);
+        }
+
+        // ── Kick off ─────────────────────────────────────────────
+        setTimeout(tick, 700);
+    </script>
+</body>
+
+</html>
